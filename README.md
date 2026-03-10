@@ -172,11 +172,7 @@ Planned enhancements include:
 - Improved UI animations
 - Save/load player progress
 
----
 
-# 📷 Screenshots
-
-*(Screenshots of gameplay will be added here once the game is complete.)*
 
 ---
 
