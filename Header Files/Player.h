@@ -5,8 +5,21 @@
 
 class Player
 {
-    
-}
+    private:
+        double health;
+        double speed;
+        double xPos;
+        double yPos;
+
+    public:
+        Player();
+        
+        void move();
+        void draw();
+        void takeDamage(double damage);
+        double getHealth();
+        
+};
 
 
 #endif
