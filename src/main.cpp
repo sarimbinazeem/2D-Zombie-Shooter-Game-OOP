@@ -25,13 +25,36 @@ int main()
         player.move();
 
         spawn++;
-        if(spawn>300) //5seconds at 60FPS
+        if(spawn>300 && zombies.size() < 20) //5seconds at 60FPS and 20 max zombies spawn for now
         {
-             float zombX = rand() % 800;
-             float zombY= rand() % 600;
+            int zombie = rand() % 4;
+            float zombX, zombY;
 
+            switch(zombie)
+            {
+                case 0: // top
+                    zombX = rand() % screenWidth;
+                    zombY = 0;
+                    break;
+                    
+                case 1: // bottom
+                    zombX = rand() % screenWidth;
+                    zombY = screenHeight;
+                    break;
+                    
+                case 2: // left
+                    zombX = 0;
+                    zombY = rand() % screenHeight;
+                    break;
+                    
+                case 3: // right
+                    zombX = screenWidth;
+                    zombY = rand() % screenHeight;
+                    break;
+            }
              zombies.push_back(Zombie(zombX,zombY));
         }
+        
         //&z is used because we want to make change in the variables of z object
         for(auto &z: zombies)
         {
