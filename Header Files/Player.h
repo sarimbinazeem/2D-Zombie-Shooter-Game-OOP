@@ -15,12 +15,12 @@ class Player
         Player();
         
         void move();
-        inline void draw();
+        void draw();
         void takeDamage(double damage);
-        inline int getHealth();
+        int getHealth();
 
-        inline double getX();
-        inline double getY();
+        double getX();
+        double getY();
         
 };
 

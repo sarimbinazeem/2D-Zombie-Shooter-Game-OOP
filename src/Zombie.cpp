@@ -1,5 +1,5 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include "Zombie.h"
 
 Zombie::Zombie(double posX,double posY)
