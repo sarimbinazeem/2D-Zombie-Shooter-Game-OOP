@@ -28,11 +28,15 @@ int main()
     while(!WindowShouldClose())
     {
         player.move();
-
+        //&z is used because we want to make change in the variables of z object
         for(auto &z: zombies)
         {
             z.moveTowards(player.getX(),player.getY());
         }
+
+        /*Alternative of using auto
+        for(std::vector<Zombie>::iterator it = zombies.begin(); it != zombies.end(); ++it) where 'it' is iterator that points towrards zombies[0] till the last  
+        */
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
