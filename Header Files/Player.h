@@ -6,7 +6,7 @@
 class Player
 {
     private:
-        double health;
+        int health;
         double speed;
         double xPos;
         double yPos;
@@ -17,7 +17,7 @@ class Player
         void move();
         void draw();
         void takeDamage(double damage);
-        double getHealth();
+        int getHealth();
         
 };
 

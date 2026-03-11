@@ -1,4 +1,4 @@
-#include <raylib.h>
+#include "raylib.h"
 #include "Player.h"
 
 
@@ -21,7 +21,8 @@ int main()
         ClearBackground(RAYWHITE);
     
         player.draw();
-        DrawText(TextFormat("Health: %d",player.getHealth(),10,10,20,RED));
+        DrawText(TextFormat("Health: %d", player.getHealth()), 10, 10, 20, RED);
+        DrawFPS(700,10);
 
         EndDrawing();
 

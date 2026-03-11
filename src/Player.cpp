@@ -1,5 +1,6 @@
 #include "Player.h"
 
+
 Player::Player()
 {
     xPos = 400;
@@ -25,7 +26,7 @@ void Player::move()
             xPos -= speed;
         }
 
-        if(IsKeyDown(KEY_A))
+        if(IsKeyDown(KEY_D))
         {
             xPos += speed;
         }   
@@ -45,7 +46,7 @@ void Player::takeDamage(double damage)
     }
 }
 
-double Player::getHealth()
+int Player::getHealth()
 {
     return health;
 }
