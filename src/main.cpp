@@ -1,6 +1,10 @@
+#include <iostream>
+#include <cstdlib>
+#include <vector>
 #include "raylib.h"
 #include "Player.h"
-
+#include "Zombie.h"
+using namespace std;
 
 int main()
 {
@@ -8,10 +12,18 @@ int main()
     const int screenHeight = 600;
 
     InitWindow(screenWidth,screenHeight,"2D-Zombie Shooter Game");
-
     SetTargetFPS(60);
-    
+
     Player player;
+    vector <Zombie> zombies;
+
+    for(int i=0;i<5;i++)
+    {
+        float zombX = rand() % 800;
+        float zombY= rand() % 600;
+
+        zombies.push_back(Zombie(zombX,zombY));
+    }
 
     while(!WindowShouldClose())
     {
