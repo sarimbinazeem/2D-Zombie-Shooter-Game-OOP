@@ -18,6 +18,9 @@ class Player
         inline void draw();
         void takeDamage(double damage);
         inline int getHealth();
+
+        inline double getX();
+        inline double getY();
         
 };
 

@@ -29,12 +29,20 @@ int main()
     {
         player.move();
 
+        for(auto &z: zombies)
+        {
+            z.moveTowards(player.getX(),player.getY());
+        }
+
         BeginDrawing();
         ClearBackground(RAYWHITE);
     
         player.draw();
+        for(auto &z: zombies)
+        {
+            z.draw();
+        }
         DrawText(TextFormat("Health: %d", player.getHealth()), 10, 10, 20, RED);
-        DrawFPS(700,10);
 
         EndDrawing();
 

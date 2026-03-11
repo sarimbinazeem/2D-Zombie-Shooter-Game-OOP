@@ -50,3 +50,13 @@ int Player::getHealth()
 {
     return health;
 }
+
+double Player::getX()
+{
+    return xPos;
+}
+
+double Player::getY()
+{
+    return yPos;
+}
