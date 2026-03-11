@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <cmath>
 #include "raylib.h"
 #include "Player.h"
 #include "Zombie.h"
@@ -17,21 +18,33 @@ int main()
     Player player;
     vector <Zombie> zombies;
 
-    for(int i=0;i<5;i++)
-    {
-        float zombX = rand() % 800;
-        float zombY= rand() % 600;
-
-        zombies.push_back(Zombie(zombX,zombY));
-    }
 
     while(!WindowShouldClose())
     {
+        int spawn = 0 ;
         player.move();
+
+        spawn++;
+        if(spawn>300) //5seconds at 60FPS
+        {
+             float zombX = rand() % 800;
+             float zombY= rand() % 600;
+
+             zombies.push_back(Zombie(zombX,zombY));
+        }
         //&z is used because we want to make change in the variables of z object
         for(auto &z: zombies)
         {
             z.moveTowards(player.getX(),player.getY());
+            double dx = player.getX() - z.getX();
+            double dy = player.getY() - z.getY();
+
+            double length = sqrt(pow(dx,2)+ pow(dy,2));
+
+            if(length>25)
+            {
+                player.takeDamage(z.getDamage());
+            }
         }
 
         /*Alternative of using auto
