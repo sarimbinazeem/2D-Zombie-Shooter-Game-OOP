@@ -1,4 +1,6 @@
 #include <raylib.h>
+#include "Player.h"
+
 
 int main()
 {
@@ -9,36 +11,18 @@ int main()
 
     SetTargetFPS(60);
     
-    int playerX = 400;
-    int playerY = 300;
-    int playerSize = 50;
-    int playerSpeed = 7;
+    Player player;
 
     while(!WindowShouldClose())
     {
-        if(IsKeyDown(KEY_W))
-        {
-            playerY -= playerSpeed;
-        }
-
-        if(IsKeyDown(KEY_S))
-        {
-            playerY += playerSpeed;
-        }
-
-        if(IsKeyDown(KEY_A))
-        {
-            playerX -= playerSpeed;
-        }
-
-        if(IsKeyDown(KEY_A))
-        {
-            playerX += playerSpeed;
-        }
+        player.move();
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawRectangle(playerX,playerY,playerSize,playerSize,BLUE);
+    
+        player.draw();
+        DrawText(TextFormat("Health: %d",player.getHealth(),10,10,20,RED));
+
         EndDrawing();
 
     }
