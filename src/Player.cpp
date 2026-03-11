@@ -55,12 +55,12 @@ int Player::getHealth()
 
 double Player::getX()
 {
-    return xPos;
+    return xPos + width/2;
 }
 
 double Player::getY()
 {
-    return yPos;
+    return yPos  + height/2;
 }
 
 double Player::getWidth()

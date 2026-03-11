@@ -19,9 +19,9 @@ int main()
     vector <Zombie> zombies;
 
 
+    int spawn = 0 ;
     while(!WindowShouldClose())
     {
-        int spawn = 0 ;
         player.move();
 
         spawn++;
@@ -43,7 +43,7 @@ int main()
 
             //To check for collision between zombie and player
             //The distance between the bodies should be equal to sum of radii of the bodies during collisiom
-            if(length> ((player.getWidth())/2 + z.getRadius())) 
+            if(length < ((player.getWidth())/2 + z.getRadius())) 
             {
                 player.takeDamage(z.getDamage());
             }

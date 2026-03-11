@@ -9,6 +9,7 @@ Zombie::Zombie(double posX,double posY)
     speed = 1;
     health = 100;
     radius = 15;
+    damage = 5;
 }
 
 void Zombie::draw()
