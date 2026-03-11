@@ -23,6 +23,7 @@ class Zombie
         double getX();
         double getY();
         int getDamage();
+        double getRadius();
 
 };
 

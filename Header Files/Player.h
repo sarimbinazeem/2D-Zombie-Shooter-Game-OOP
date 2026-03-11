@@ -10,6 +10,8 @@ class Player
         double speed;
         double xPos;
         double yPos;
+        int width;
+        int height;
 
     public:
         Player();
@@ -21,7 +23,8 @@ class Player
 
         double getX();
         double getY();
-        
+        double getWidth();
+
 };
 
 

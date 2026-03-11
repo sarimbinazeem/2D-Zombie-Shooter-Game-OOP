@@ -7,6 +7,8 @@ Player::Player()
     yPos = 300;
     speed = 5;
     health = 100;
+    width = 40;
+    height =40;
 }
 
 void Player::move()
@@ -34,7 +36,7 @@ void Player::move()
 
 void Player::draw()
 {
-    DrawRectangle(xPos,yPos,40,40,BLUE);
+    DrawRectangle(xPos,yPos,width,height,BLUE);
 }
 
 void Player::takeDamage(double damage)
@@ -59,4 +61,9 @@ double Player::getX()
 double Player::getY()
 {
     return yPos;
+}
+
+double Player::getWidth()
+{
+    return width;
 }

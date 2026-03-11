@@ -41,7 +41,9 @@ int main()
 
             double length = sqrt(pow(dx,2)+ pow(dy,2));
 
-            if(length>25)
+            //To check for collision between zombie and player
+            //The distance between the bodies should be equal to sum of radii of the bodies during collisiom
+            if(length> ((player.getWidth())/2 + z.getRadius())) 
             {
                 player.takeDamage(z.getDamage());
             }

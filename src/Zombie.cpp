@@ -58,3 +58,8 @@ void Zombie::moveTowards(double playerX, double playerY)
     posX = posX+ dx*speed;
     posY = posY + dy*speed;
 }
+
+double Zombie::getRadius()
+{
+    return radius;
+}
