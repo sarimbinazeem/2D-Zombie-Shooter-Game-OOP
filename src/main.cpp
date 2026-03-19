@@ -130,9 +130,33 @@ int main()
 
         }
 
-        
+
         DrawText(TextFormat("Health: %d", player.getHealth()), 10, 10, 20, RED);
 
+
+        //Erasing The Useless Bulllets And Zombies
+        for(int i=0; i<bullets.size(); i++)
+        {
+            for(int j=0; j<zombies.size(); j++)
+            {
+                //To Check If Bullet and Zombies Have Collided Or Not
+                Vector2 bulletPos = bullets[i].getPosition();
+                Vector2 zombiePos = zombies[j].getPosition();
+
+                double dx = bulletPos.x - zombiePos.x;
+                double dy = bulletPos.y - zombiePos.y;
+
+                double length = sqrt(pow(dx,2)+ pow(dy,2)); //The distance between Zombie and Bullet
+                int radius = bullets[i].getRadius() + zombies[j].getRadius();
+                if(length <= radius )
+                {
+                    bullets.erase(bullets.begin() + i);
+                    zombies.erase(zombies.begin() + j);
+
+                    break; //because bullet doesnt exist so skip this bullet loop and move to next
+                }
+            }
+        }
         EndDrawing();
 
     }

@@ -10,7 +10,7 @@ class Zombie
         double posY;
         double speed;
         int damage;
-        double radius;
+        int radius;
 
     public:
         Zombie(double posX,double posY);
@@ -23,8 +23,8 @@ class Zombie
         double getX();
         double getY();
         int getDamage();
-        double getRadius();
-
+        int getRadius();
+        Vector2 getPosition();
 };
 
 #endif

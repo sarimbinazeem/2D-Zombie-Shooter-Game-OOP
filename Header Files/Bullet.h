@@ -25,6 +25,8 @@ class Bullet
         //Vector2 To get 2 Variables Vector (Co-ordinates of the BULLET)
         Vector2 getPosition();
 
+        int getRadius();
+
 };
 
 #endif

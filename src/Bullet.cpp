@@ -28,3 +28,8 @@ Vector2 Bullet::getPosition()
 {
     return{x,y};
 }
+
+int  Bullet::getRadius()
+{
+    return radius;
+}
