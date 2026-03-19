@@ -5,6 +5,7 @@
 #include "raylib.h"
 #include "Player.h"
 #include "Zombie.h"
+#include "Bullet.h"
 using namespace std;
 
 int main()
@@ -16,14 +17,17 @@ int main()
     SetTargetFPS(60);
 
     Player player;
+    //Vector Zombie created so that there is no size limit on creation of zombie
     vector <Zombie> zombies;
 
 
     int spawn = 0 ;
     while(!WindowShouldClose())
     {
+        //Player Move Logic
         player.move();
-
+        
+        //Zombie Spawning Logic
         spawn++;
         if(spawn>300 && zombies.size() < 20) //5seconds at 60FPS and 20 max zombies spawn for now
         {
@@ -55,6 +59,7 @@ int main()
              zombies.push_back(Zombie(zombX,zombY));
         }
         
+        //Zombie Move Towards Player Logic
         //&z is used because we want to make change in the variables of z object
         for(auto &z: zombies)
         {
@@ -71,11 +76,15 @@ int main()
                 player.takeDamage(z.getDamage());
             }
         }
-
         /*Alternative of using auto
-        for(std::vector<Zombie>::iterator it = zombies.begin(); it != zombies.end(); ++it) where 'it' is iterator that points towrards zombies[0] till the last  
+        for(vector<Zombie>::iterator it = zombies.begin(); it != zombies.end(); ++it) where 'it' is iterator that points towrards zombies[0] till the last  
         */
 
+       //Bullets logic
+        vector<Bullet> bullets;
+
+
+       //Drawing Logic
         BeginDrawing();
         ClearBackground(RAYWHITE);
     
