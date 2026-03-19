@@ -118,10 +118,19 @@ int main()
         ClearBackground(RAYWHITE);
     
         player.draw();
+
         for(auto &z: zombies)
         {
             z.draw();
         }
+
+        for(int i=0; i<bullets.size(); i++)
+        {
+            bullets[i].drawBullet();
+
+        }
+
+        
         DrawText(TextFormat("Health: %d", player.getHealth()), 10, 10, 20, RED);
 
         EndDrawing();
