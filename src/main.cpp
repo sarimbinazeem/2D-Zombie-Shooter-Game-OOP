@@ -20,6 +20,8 @@ int main()
     //Vector Zombie created so that there is no size limit on creation of zombie
     vector <Zombie> zombies;
 
+    //Bullets  Vector so that there are no limits on creation of bullets 
+    vector<Bullet> bullets;
 
     int spawn = 0 ;
     while(!WindowShouldClose())
@@ -57,6 +59,7 @@ int main()
                     break;
             }
              zombies.push_back(Zombie(zombX,zombY));
+             spawn = 0;
         }
         
         //Zombie Move Towards Player Logic
@@ -80,8 +83,6 @@ int main()
         for(vector<Zombie>::iterator it = zombies.begin(); it != zombies.end(); ++it) where 'it' is iterator that points towrards zombies[0] till the last  
         */
 
-       //Bullets  Vector so that there are no limits on creation of bullets 
-        vector<Bullet> bullets;
 
         //Bullet Shooting Logic
         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -91,7 +92,7 @@ int main()
             
             //The direction of bullet is normalized to cover equal distances in equal time
             Vector2 direction;
-            direction.x = mouse.x = playerPosition.x;
+            direction.x = mouse.x - playerPosition.x;
             direction.y = mouse.y - playerPosition.y;
 
             double length = sqrt(pow(direction.x ,2)+ pow(direction.y ,2)); //The distance between Mouse and Player
@@ -137,11 +138,21 @@ int main()
         //Erasing The Useless Bulllets And Zombies
         for(int i=0; i<bullets.size(); i++)
         {
+
+             //To Check If Bullet and Zombies Have Collided Or Not
+             Vector2 bulletPos = bullets[i].getPosition();
+
+             //Removing the ofscreen bullets (so that it doesnt exist forever)
+            if(bullets[i].getPosition().x >800 || bullets[i].getPosition().x <0 || bullets[i].getPosition().y > 600 || bullets[i].getPosition().y < 0)
+            {
+                bullets.erase(bullets.begin() + i);
+                i--; //Skipped so that the next bullet of the one that is removed is not skipped (Due To Vector Removing in between)
+                continue;
+             }
+
             for(int j=0; j<zombies.size(); j++)
             {
-                //To Check If Bullet and Zombies Have Collided Or Not
-                Vector2 bulletPos = bullets[i].getPosition();
-                Vector2 zombiePos = zombies[j].getPosition();
+               Vector2 zombiePos = zombies[j].getPosition();
 
                 double dx = bulletPos.x - zombiePos.x;
                 double dy = bulletPos.y - zombiePos.y;
@@ -151,17 +162,15 @@ int main()
                 if(length <= radius )
                 {
                     bullets.erase(bullets.begin() + i);
+                    i--;
                     zombies.erase(zombies.begin() + j);
+                    j--;
 
                     break; //because bullet doesnt exist so skip this bullet loop and move to next
                 }
-
-                //Removing the ofscreen bullets (so that it doesnt exist forever)
-                if(bullets[i].getPosition().x >800 || bullets[i].getPosition().x <0 || bullets[i].getPosition().y > 600 || bullets[i].getPosition().y < 0)
-                {
-                    bullets.erase(bullets.begin() + i);
-                }
             }
+
+            
         }
 
         
