@@ -155,8 +155,16 @@ int main()
 
                     break; //because bullet doesnt exist so skip this bullet loop and move to next
                 }
+
+                //Removing the ofscreen bullets (so that it doesnt exist forever)
+                if(bullets[i].getPosition().x >800 || bullets[i].getPosition().x <0 || bullets[i].getPosition().y > 600 || bullets[i].getPosition().y < 0)
+                {
+                    bullets.erase(bullets.begin() + i);
+                }
             }
         }
+
+        
         EndDrawing();
 
     }
