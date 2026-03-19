@@ -80,9 +80,32 @@ int main()
         for(vector<Zombie>::iterator it = zombies.begin(); it != zombies.end(); ++it) where 'it' is iterator that points towrards zombies[0] till the last  
         */
 
-       //Bullets logic
+       //Bullets  Vector so that there are no limits on creation of bullets 
         vector<Bullet> bullets;
 
+        //Bullet Shooting Logic
+        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            Vector2 mouse = GetMousePosition();
+            Vector2 playerPosition = {player.getX(), player.getY()};
+            
+            //The direction of bullet is normalized to cover equal distances in equal time
+            Vector2 direction;
+            direction.x = mouse.x = playerPosition.x;
+            direction.y = mouse.y - playerPosition.y;
+
+            double length = sqrt(pow(direction.x ,2)+ pow(direction.y ,2)); //The distance between Mouse and Player
+
+            //Edge Case
+             if(length!= 0)
+            {
+                direction.x = direction.x/length;
+                direction.y  = direction.y /length;
+            }
+
+            //Create a bullet that goes where mouse aims at smoothly
+            bullets.push_back(Bullet(playerPosition.x,playerPosition.y,direction.x,direction.y));
+        }
 
        //Drawing Logic
         BeginDrawing();
