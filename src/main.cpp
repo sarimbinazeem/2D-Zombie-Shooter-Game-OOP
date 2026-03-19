@@ -107,6 +107,12 @@ int main()
             bullets.push_back(Bullet(playerPosition.x,playerPosition.y,direction.x,direction.y));
         }
 
+        //Updating Bullet Position
+        for(int i=0;i<bullets.size(); i++)
+        {
+            bullets[i].updateDirection();
+        }
+
        //Drawing Logic
         BeginDrawing();
         ClearBackground(RAYWHITE);
