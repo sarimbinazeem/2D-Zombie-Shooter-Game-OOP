@@ -9,5 +9,5 @@ void Pistol::shoot(vector <Bullet> &bullet, double x,double y)
 
 double Pistol::getRate()
 {
-    return 0.5;
+    return 0.5; //Slow
 }
