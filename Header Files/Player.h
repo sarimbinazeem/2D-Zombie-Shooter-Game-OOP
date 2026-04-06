@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include <raylib.h>
+#include <Weapon.h>
+using namespace std;
 
 class Player
 {
@@ -12,10 +14,14 @@ class Player
         double yPos;
         int width;
         int height;
+        Weapon* weapon;
 
     public:
         Player();
         
+        void setWeapon(Weapon *w);
+        void shoot(vector <Bullet>& bullet);
+
         void move();
         void draw();
         void takeDamage(double damage);
