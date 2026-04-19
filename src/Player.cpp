@@ -88,3 +88,16 @@ double Player::getWidth()
 {
     return width;
 }
+
+void Player::setWeapon(Weapon* newWeapon)
+{
+    weapon = newWeapon;
+}
+
+void Player::shoot(vector<Bullet>& bullets)
+{
+    if (weapon != nullptr)
+    {
+        weapon->shoot(bullets,xPos, yPos);
+    }
+}
