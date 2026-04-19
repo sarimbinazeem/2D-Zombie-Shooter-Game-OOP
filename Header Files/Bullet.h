@@ -1,32 +1,32 @@
-#ifndef BULLET_H
-#define BULLET_H
+    #ifndef BULLET_H
+    #define BULLET_H
 
-#include <raylib.h>
+    #include <raylib.h>
 
-class Bullet
-{
-    private:
-        double x;
-        double y;
+    class Bullet
+    {
+        private:
+            float x;
+            float y;
 
-        double speed;
+            double speed;
 
-        double directionX;
-        double directionY;
+            float directionX;
+            float directionY;
 
-        int radius;
+            int radius;
 
-    public:
-        Bullet(double x, double y, double dirX, double dirY);
+        public:
+            Bullet(float x, float y, float dirX, float dirY);
 
-        void updateDirection();
-        void drawBullet();
+            void updateDirection();
+            void drawBullet();
 
-        //Vector2 To get 2 Variables Vector (Co-ordinates of the BULLET)
-        Vector2 getPosition();
+            //Vector2 To get 2 Variables Vector (Co-ordinates of the BULLET)
+            Vector2 getPosition();
 
-        int getRadius();
+            int getRadius();
 
-};
+    };
 
-#endif
+    #endif

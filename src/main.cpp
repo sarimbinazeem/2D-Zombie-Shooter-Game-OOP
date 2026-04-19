@@ -7,6 +7,9 @@
 #include "Zombie.h"
 #include "Bullet.h"
 #include "Weapon.h"
+#include "Pistol.h"
+#include "Shotgun.h"
+#include  "MachineGun.h"
 using namespace std;
 
 int main()
@@ -47,7 +50,8 @@ int main()
         if(spawn>300 && zombies.size() < 20) //5seconds at 60FPS and 20 max zombies spawn for now
         {
             int zombie = rand() % 4;
-            float zombX, zombY;
+            float zombX  = 50;
+            float zombY = 10; 
 
             switch(zombie)
             {
@@ -99,31 +103,10 @@ int main()
         //==========Bullet==========
 
         //Bullet Shooting Logic
-        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mouse = GetMousePosition();
-            Vector2 playerPosition = {player.getX(), player.getY()};
-            
-            //The direction of bullet is normalized to cover equal distances in equal time
-            Vector2 direction;
-            direction.x = mouse.x - playerPosition.x;
-            direction.y = mouse.y - playerPosition.y;
-
-            double length = sqrt(pow(direction.x ,2)+ pow(direction.y ,2)); //The distance between Mouse and Player
-
-            //Edge Case
-             if(length!= 0)
-            {
-                direction.x = direction.x/length;
-                direction.y  = direction.y /length;
-            }
-
-            //Create a bullet that goes where mouse aims at smoothly
-            bullets.push_back(Bullet(playerPosition.x,playerPosition.y,direction.x,direction.y));
-        }
+ 
 
         //Updating Bullet Position
-        for(int i=0;i<bullets.size(); i++)
+        for(size_t i=0;i<bullets.size(); i++)
         {
             bullets[i].updateDirection();
         }
@@ -145,14 +128,14 @@ int main()
 
         //Fire Rate Logic
         static double lastShotTime = 0.0;
-        
-        if(isKeyDown(KEY_SPACE))
+
+        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             double currentTime =GetTime();
-            if(currentTime - lastShotTime >= player.getWeapon()->getFireRate())
+            if(currentTime - lastShotTime >= player.getWeapon()->getRate())
             {
                 player.shoot(bullets);
-  ;
+  
                 
                 lastShotTime = currentTime; // Update the last shot time
             }
@@ -172,7 +155,7 @@ int main()
         }
 
         //Bullets
-        for(int i=0; i<bullets.size(); i++)
+        for(size_t i=0; i<bullets.size(); i++)
         {
             bullets[i].drawBullet();
 
@@ -184,7 +167,7 @@ int main()
 
         //==========Erasing==========
         //Erasing The Useless Bulllets And Zombies
-        for(int i=0; i<bullets.size(); i++)
+        for(size_t i=0; i<bullets.size(); i++)
         {
 
              //To Check If Bullet and Zombies Have Collided Or Not
@@ -198,7 +181,7 @@ int main()
                 continue;
              }
 
-            for(int j=0; j<zombies.size(); j++)
+            for(size_t j=0; j<zombies.size(); j++)
             {
                Vector2 zombiePos = zombies[j].getPosition();
 

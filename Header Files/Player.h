@@ -2,7 +2,8 @@
 #define PLAYER_H
 
 #include <raylib.h>
-#include <Weapon.h>
+#include "Weapon.h"
+
 using namespace std;
 
 class Player
@@ -10,8 +11,8 @@ class Player
     private:
         int health;
         double speed;
-        double xPos;
-        double yPos;
+        float xPos;
+        float yPos;
         int width;
         int height;
         Weapon* weapon;
@@ -27,9 +28,10 @@ class Player
         void takeDamage(double damage);
         int getHealth();
 
-        double getX();
-        double getY();
+        float getX();
+        float getY();
         double getWidth();
+        Weapon* getWeapon();
 
 };
 

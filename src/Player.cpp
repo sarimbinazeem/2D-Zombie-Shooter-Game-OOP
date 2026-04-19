@@ -74,12 +74,12 @@ int Player::getHealth()
     return health;
 }
 
-double Player::getX()
+float Player::getX()
 {
     return xPos + width / 2;
 }
 
-double Player::getY()
+float Player::getY()
 {
     return yPos + height / 2;
 }
@@ -100,4 +100,9 @@ void Player::shoot(vector<Bullet>& bullets)
     {
         weapon->shoot(bullets,xPos, yPos);
     }
+}
+
+Weapon* Player::getWeapon()
+{
+    return weapon;
 }

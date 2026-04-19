@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-Bullet::Bullet(double beginX, double beginY, double dirX, double dirY)
+Bullet::Bullet(float beginX, float beginY, float dirX, float dirY)
 {
     x = beginX;
     y = beginY;

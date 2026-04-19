@@ -6,22 +6,22 @@ class Zombie
 {
     private:
         int health;
-        double posX;
-        double posY;
+        float posX;
+        float posY;
         double speed;
         int damage;
         int radius;
 
     public:
-        Zombie(double posX,double posY);
+        Zombie(float posX,float posY);
 
-        void moveTowards(double playerX, double playerY);
+        void moveTowards(float playerX, float playerY);
         void draw();
         void takeDamage(int dmg);
         bool isAlive();
 
-        double getX();
-        double getY();
+        float getX();
+        float getY();
         int getDamage();
         int getRadius();
         Vector2 getPosition();

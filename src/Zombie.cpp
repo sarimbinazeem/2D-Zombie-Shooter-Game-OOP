@@ -2,7 +2,7 @@
 #include <cmath>
 #include "Zombie.h"
 
-Zombie::Zombie(double posX,double posY)
+Zombie::Zombie(float posX,float posY)
 {
     this->posX = posX;
     this->posY = posY;
@@ -27,12 +27,12 @@ bool Zombie::isAlive()
     return health>0;
 }
 
-double Zombie::getX()
+float Zombie::getX()
 {
     return posX;
 }
 
-double Zombie::getY()
+float Zombie::getY()
 {
     return posY;
 }
@@ -42,12 +42,12 @@ int  Zombie::getDamage()
     return damage;
 }
 
-void Zombie::moveTowards(double playerX, double playerY)
+void Zombie::moveTowards(float playerX, float playerY)
 {
-    double dx = playerX - posX;
-    double dy = playerY - posY;
+    float dx = playerX - posX;
+    float dy = playerY - posY;
 
-    double length = sqrt(pow(dx,2)+ pow(dy,2)); //The distance between Zombie and Player
+    float length = sqrt(pow(dx,2)+ pow(dy,2)); //The distance between Zombie and Player
 
     //To Make the Zombie Run Smoothly We Normalize The Vector
     if(length!= 0)
