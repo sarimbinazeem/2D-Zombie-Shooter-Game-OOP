@@ -16,7 +16,15 @@ int main()
     InitWindow(screenWidth,screenHeight,"2D-Zombie Shooter Game");
     SetTargetFPS(60);
 
+    //Player Creation
     Player player;
+
+    //Weapon Creation
+    Pistol pistol;
+    Shotgun shotgun;
+    MachineGun machineGun;
+    player.setWeapon(&pistol); // Default weapon is pistol
+
     //Vector Zombie created so that there is no size limit on creation of zombie
     vector <Zombie> zombies;
 
@@ -24,10 +32,14 @@ int main()
     vector<Bullet> bullets;
 
     int spawn = 0 ;
+    
     while(!WindowShouldClose())
     {
+        //==========Player==========
         //Player Move Logic
         player.move();
+
+        //==========Zombie==========
         
         //Zombie Spawning Logic
         spawn++;
@@ -83,6 +95,7 @@ int main()
         for(vector<Zombie>::iterator it = zombies.begin(); it != zombies.end(); ++it) where 'it' is iterator that points towrards zombies[0] till the last  
         */
 
+        //==========Bullet==========
 
         //Bullet Shooting Logic
         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -114,27 +127,34 @@ int main()
             bullets[i].updateDirection();
         }
 
-       //Drawing Logic
+
+
+
+       //==========Drawing Logic==========
         BeginDrawing();
         ClearBackground(RAYWHITE);
-    
+        
+        //Player
         player.draw();
 
+        //Zombie
         for(auto &z: zombies)
         {
             z.draw();
         }
 
+        //Bullets
         for(int i=0; i<bullets.size(); i++)
         {
             bullets[i].drawBullet();
 
         }
 
-
+        //HP BAR
         DrawText(TextFormat("Health: %d", player.getHealth()), 10, 10, 20, RED);
 
 
+        //==========Erasing==========
         //Erasing The Useless Bulllets And Zombies
         for(int i=0; i<bullets.size(); i++)
         {
