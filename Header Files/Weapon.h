@@ -8,7 +8,7 @@ using namespace std;
 class Weapon
 {
     public:
-        virtual void shoot(vector <Bullet> &bullet, double x,double y) =0;
+        virtual void shoot(vector<Bullet>& bullet, double x, double y, float directionX, float directionY) = 0;
         virtual double getRate() = 0;
 
         virtual ~Weapon()

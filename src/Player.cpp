@@ -94,11 +94,11 @@ void Player::setWeapon(Weapon* newWeapon)
     weapon = newWeapon;
 }
 
-void Player::shoot(vector<Bullet>& bullets)
+void Player::shoot(vector<Bullet>& bullets, float dirX, float dirY)
 {
     if (weapon != nullptr)
     {
-        weapon->shoot(bullets,xPos, yPos);
+        weapon->shoot(bullets, getX(), getY(), dirX, dirY);
     }
 }
 

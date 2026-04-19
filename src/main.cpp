@@ -129,17 +129,31 @@ int main()
         //Fire Rate Logic
         static double lastShotTime = 0.0;
 
-        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        if(IsKeyDown(KEY_SPACE))
         {
-            double currentTime =GetTime();
+            double currentTime = GetTime();
+
             if(currentTime - lastShotTime >= player.getWeapon()->getRate())
             {
-                player.shoot(bullets);
-  
-                
-                lastShotTime = currentTime; // Update the last shot time
+                Vector2 mouse = GetMousePosition();
+
+                float dx = mouse.x - player.getX();
+                float dy = mouse.y - player.getY();
+
+                float length = sqrt(dx*dx + dy*dy);
+
+                if(length != 0)
+                {
+                    dx /= length;
+                    dy /= length;
+                }
+
+                player.shoot(bullets, dx, dy);
+
+                lastShotTime = currentTime;
             }
         }
+
 
        //==========Drawing Logic==========
         BeginDrawing();

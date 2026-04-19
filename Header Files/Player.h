@@ -21,7 +21,7 @@ class Player
         Player();
         
         void setWeapon(Weapon *w);
-        void shoot(vector <Bullet>& bullet);
+        void shoot(vector<Bullet>& bullets, float dirX, float dirY);
 
         void move();
         void draw();

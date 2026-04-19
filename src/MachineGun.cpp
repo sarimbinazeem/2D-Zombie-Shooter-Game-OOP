@@ -1,11 +1,9 @@
 #include "Machinegun.h"
 using namespace std;
 
-void MachineGun::shoot(vector <Bullet> &bullet, double x,double y)
+void MachineGun::shoot(vector<Bullet>& bullet, double x, double y, float directionX, float directionY)
 {
-    bullet.push_back(Bullet(x,y,0,-7));
-
-
+    bullet.push_back(Bullet(x, y, directionX, directionY));
 }
 
 double MachineGun::getRate()
