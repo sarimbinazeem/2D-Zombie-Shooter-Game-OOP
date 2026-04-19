@@ -25,7 +25,10 @@ class Enemy
         void takeDamage(int damage);
         bool isDead() const;
 
-        
+        //Getters
+        double getX() const;
+        double getY() const;
+
         //Virtual Destructor
         virtual ~Enemy();
 
