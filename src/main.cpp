@@ -127,8 +127,35 @@ int main()
             bullets[i].updateDirection();
         }
 
+        //==========Weapon==========
+        //Weapon Switching Logic
+        if(IsKeyPressed(KEY_ONE))
+        {
+            player.setWeapon(&pistol);
+        }
+        else if(IsKeyPressed(KEY_TWO))        
+        {
+            player.setWeapon(&shotgun);
+        }
+        else if(IsKeyPressed(KEY_THREE))
+        {
+            player.setWeapon(&machineGun);
+        }
 
-
+        //Fire Rate Logic
+        static double lastShotTime = 0.0;
+        
+        if(isKeyDown(KEY_SPACE))
+        {
+            double currentTime =GetTime();
+            if(currentTime - lastShotTime >= player.getWeapon()->getFireRate())
+            {
+                player.shoot(bullets);
+  ;
+                
+                lastShotTime = currentTime; // Update the last shot time
+            }
+        }
 
        //==========Drawing Logic==========
         BeginDrawing();
