@@ -5,7 +5,7 @@ void Shotgun::shoot(vector<Bullet>& bullet, double x, double y, float directionX
 {
     bullet.push_back(Bullet(x,y,directionX - 0.2f,directionY));
     bullet.push_back(Bullet(x,y,directionX,directionY));
-    bullet.push_back(Bullet(x,y,directionX + 0.2f,-5));
+    bullet.push_back(Bullet(x,y,directionX + 0.2f,directionY));
 
 }
 
