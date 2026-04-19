@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Zombie.h"
 #include "Bullet.h"
+#include "Weapon.h"
 using namespace std;
 
 int main()
