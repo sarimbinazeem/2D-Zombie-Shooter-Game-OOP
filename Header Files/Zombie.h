@@ -20,8 +20,7 @@ class Zombie : class Enemy
         bool isAlive();
 
         //Getters
-        float getX();
-        float getY();
+
         int getDamage();
         int getRadius();
         Vector2 getPosition();

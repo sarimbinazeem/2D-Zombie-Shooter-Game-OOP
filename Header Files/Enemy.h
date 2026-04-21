@@ -6,7 +6,7 @@ using namespace std;
 
 class Enemy
 {
-    private:
+    protected:
         int health;
         float  x;
         float  y;
@@ -16,14 +16,15 @@ class Enemy
     public:
       // Constructor
         Enemy();
+        Enemy(float startX, float startY, float speed);
 
         //Pure Virtual Functions
         virtual void update(float playerX, float playerY) = 0;
         virtual void draw() = 0;
 
         //Member Functions
-        void takeDamage(int damage);
-        bool isDead() const;
+        virtual void takeDamage(int damage) = 0;
+        virtual bool isDead() const = 0; 
 
         //Getters
         float  getX() const;
