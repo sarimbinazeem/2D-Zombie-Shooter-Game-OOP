@@ -129,7 +129,7 @@ int main()
         //Fire Rate Logic
         static double lastShotTime = 0.0;
 
-        if(IsKeyDown(KEY_SPACE))
+        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             double currentTime = GetTime();
 

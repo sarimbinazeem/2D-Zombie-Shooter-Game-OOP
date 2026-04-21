@@ -11,5 +11,5 @@ void Shotgun::shoot(vector<Bullet>& bullet, double x, double y, float directionX
 
 double Shotgun::getRate()
 {
-    return 1.0; // Slower
+    return 1.2; // Slower
 }
