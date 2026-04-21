@@ -11,12 +11,15 @@ class Enemy
         float  x;
         float  y;
         float  speed;
+        
+        int damage;
+        int radius;
 
 
     public:
       // Constructor
         Enemy();
-        Enemy(float startX, float startY, float speed);
+        Enemy(float startX, float startY, int radius);
 
         //Pure Virtual Functions
         virtual void update(float playerX, float playerY) = 0;

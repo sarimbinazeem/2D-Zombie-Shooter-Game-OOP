@@ -1,9 +1,13 @@
 #include "Enemy.h"
 
-Enemy:: Enemy(float startX, float startY, float speed); {
+Enemy::  Enemy(float startX, float startY, int radius)
+ {
     x = startX;
     y = startY;
-    this->speed = speed;
+
+    this->radius = radius;
+
+
     health =100;
 }
 
@@ -17,4 +21,12 @@ float Enemy::getX()
 float Enemy::getY()  
 {
     return x;
+}
+
+Enemy::Enemy()
+{
+    x= 0;
+    y = 0;
+    speed = 1.0f;
+    health = 100
 }
