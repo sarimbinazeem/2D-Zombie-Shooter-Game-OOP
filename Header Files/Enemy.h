@@ -8,9 +8,9 @@ class Enemy
 {
     private:
         int health;
-        double x;
-        double y;
-        double speed;
+        float  x;
+        float  y;
+        float  speed;
 
 
     public:
@@ -26,8 +26,8 @@ class Enemy
         bool isDead() const;
 
         //Getters
-        double getX() const;
-        double getY() const;
+        float  getX() const;
+        float  getY() const;
 
         //Virtual Destructor
         virtual ~Enemy();
