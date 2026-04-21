@@ -15,7 +15,6 @@ class Zombie : class Enemy
         Zombie(float posX,float posY);
 
         //Member Functions
-        void moveTowards(float playerX, float playerY);
         void draw();
         void takeDamage(int dmg);
         bool isAlive();

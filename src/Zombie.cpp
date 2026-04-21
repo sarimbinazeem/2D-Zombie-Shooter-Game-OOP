@@ -12,10 +12,6 @@ Zombie::Zombie(float posX,float posY)
     damage = 5;
 }
 
-void Zombie::draw()
-{
-    DrawCircle((int)posX,(int)posY,radius,GREEN);
-}
 
 void Zombie::takeDamage(int dmg)
 {
@@ -42,7 +38,13 @@ int  Zombie::getDamage()
     return damage;
 }
 
-void Zombie::moveTowards(float playerX, float playerY)
+//Function overriding
+
+void Zombie::draw()
+{
+    DrawCircle((int)posX,(int)posY,radius,GREEN);
+}
+void Zombie::update(float playerX, float playerY)
 {
     float dx = playerX - posX;
     float dy = playerY - posY;
