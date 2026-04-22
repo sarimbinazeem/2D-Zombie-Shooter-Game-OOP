@@ -89,6 +89,11 @@ double Player::getWidth()
     return width;
 }
 
+double Player::getHeight()
+{
+    return height;
+}
+
 void Player::setWeapon(Weapon* newWeapon)
 {
     weapon = newWeapon;

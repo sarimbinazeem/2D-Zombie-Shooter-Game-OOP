@@ -31,6 +31,7 @@ class Player
         float getX();
         float getY();
         double getWidth();
+        double getHeight();
         Weapon* getWeapon();
 
 };
