@@ -13,30 +13,7 @@ Zombie::Zombie(float posX,float posY)
 }
 
 
-void Zombie::takeDamage(int dmg)
-{
-    health -= dmg;
-}
 
-bool Zombie::isAlive()
-{
-    return health>0;
-}
-
-float Zombie::getX()
-{
-    return posX;
-}
-
-float Zombie::getY()
-{
-    return posY;
-}
-
-int  Zombie::getDamage()
-{
-    return damage;
-}
 
 //Function overriding
 
@@ -62,12 +39,3 @@ void Zombie::update(float playerX, float playerY)
     posY = posY + dy*speed;
 }
 
-int Zombie::getRadius()
-{
-    return radius;
-}
-
-Vector2 Zombie::getPosition()
-{
-    return{posX,posY};
-}

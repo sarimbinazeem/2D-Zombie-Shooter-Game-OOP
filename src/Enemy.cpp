@@ -30,3 +30,38 @@ Enemy::Enemy()
     damage = 5;
     health =100;
 }
+
+void Enemy::takeDamage(int dmg)
+{
+    health -= dmg;
+}
+
+bool Enemy::isAlive()
+{
+    return health>0;
+}
+
+float Enemy::getX()
+{
+    return posX;
+}
+
+float Enemy::getY()
+{
+    return posY;
+}
+
+int  Enemy::getDamage()
+{
+    return damage;
+}
+
+int Enemy::getRadius()
+{
+    return radius;
+}
+
+Vector2 Enemy::getPosition()
+{
+    return{posX,posY};
+}

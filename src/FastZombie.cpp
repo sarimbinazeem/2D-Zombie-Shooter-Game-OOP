@@ -39,3 +39,4 @@ void FastZombie::draw()
 {
     DrawCircle(x, y, radius, RED);
 }
+
