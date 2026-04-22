@@ -4,8 +4,14 @@
 #include <cmath>
 #include "raylib.h"
 #include "Player.h"
+
+#include "Enemy.h"
+#include "FastZombie.h"
+#include "TankZombie.h"
 #include "Zombie.h"
+
 #include "Bullet.h"
+
 #include "Weapon.h"
 #include "Pistol.h"
 #include "Shotgun.h"
@@ -48,7 +54,7 @@ int main()
         
         //Enemy Spawning Logic
         spawn++;
-        if(spawn>300 && zombies.size() < 20) //5seconds at 60FPS and 20 max Enemy spawn for now
+        if(spawn>300 && enemies.size() < 20) //5seconds at 60FPS and 20 max Enemy spawn for now
         {
             int type = rand() % 3;
             int side  = rand() % 4;
@@ -56,7 +62,7 @@ int main()
             float zombX  = 50;
             float zombY = 10; 
 
-            switch(zombie)
+            switch(side)
             {
                 case 0: // top
                     zombX = rand() % screenWidth;
@@ -81,21 +87,23 @@ int main()
 
             }
 
-            switch(type)
+            if(type==0)
             {
-                case 0:
-                    enemies.push_back(new Zombie(zombX,zombY));
-                    break;
+                enemies.push_back(new Zombie(zombX,zombY));
 
-                case 1:
-                    enemies.push_back(new FastZombie(zombX,zombY));
-                    break;
-
-                case 2:
-                    enemies.push_back(new TankZombie(zombX,zombY));
-                    break;
             }
-            
+
+            else if(type==1)
+            {
+
+                enemies.push_back(new FastZombie(zombX,zombY));
+            }
+
+            else
+            {
+                enemies.push_back(new TankZombie(zombX,zombY));
+
+            }
             
              spawn = 0;
         }
@@ -183,15 +191,15 @@ int main()
                 continue;
              }
 
-            for(size_t j=0; j<zombies.size(); j++)
+            for(size_t j=0; j<enemies.size(); j++)
             {
-               Vector2 zombiePos = zombies[j].getPosition();
+               Vector2 zombiePos = enemies[j]->getPosition();
 
                 double dx = bulletPos.x - zombiePos.x;
                 double dy = bulletPos.y - zombiePos.y;
 
                 double length = sqrt(pow(dx,2)+ pow(dy,2)); //The distance between Zombie and Bullet
-                int radius = bullets[i].getRadius() + zombies[j].getRadius();
+                int radius = bullets[i].getRadius() + enemies[j]->getRadius();
                 if(length <= radius )
                 {
                     bullets.erase(bullets.begin()+i);

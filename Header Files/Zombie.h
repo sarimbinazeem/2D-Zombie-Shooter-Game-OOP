@@ -3,7 +3,7 @@
 #include "raylib.h"
 #include "Enemy.h"
 
-class Zombie : class Enemy
+class Zombie : public Enemy
 {
 
     public:
@@ -13,8 +13,6 @@ class Zombie : class Enemy
         //Function overriding
         void update(float playerX, float playerY) override;
         void draw() override;       
-        void takeDamage(int damage) override;
-        bool isAlive() override;
 
         //Getters
         int getDamage();

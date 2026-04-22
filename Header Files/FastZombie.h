@@ -15,4 +15,6 @@ class FastZombie : public Enemy
         void update(float playerX, float playerY) override;
         void draw() override;       
 
-}
+};
+
+#endif

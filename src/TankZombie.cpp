@@ -27,5 +27,5 @@ TankZombie::update(float playerX, float playerY)
 
 TankZombie::draw()
 {
-    DrawCircle(x, y, radius, PURPLE);
+    DrawCircle(x, y, radius, RED);
 }

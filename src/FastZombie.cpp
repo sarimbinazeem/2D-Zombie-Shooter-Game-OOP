@@ -37,6 +37,6 @@ void FastZombie::update(float playerX, float playerY)
 
 void FastZombie::draw()
 {
-    DrawCircle(x, y, radius, RED);
+    DrawCircle(x, y, radius, BLUE);
 }
 
