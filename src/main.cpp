@@ -29,8 +29,9 @@ int main()
     MachineGun machineGun;
     player.setWeapon(&pistol); // Default weapon is pistol
 
-    //Vector Zombie created so that there is no size limit on creation of zombie
-    vector <Zombie> zombies;
+    //PolyMorphsim By Base Pointer 
+    //Vector Enemy created so that there is no size limit on creation of Enemies
+    vector<Enemy*> enemies;
 
     //Bullets  Vector so that there are no limits on creation of bullets 
     vector<Bullet> bullets;
@@ -43,13 +44,15 @@ int main()
         //Player Move Logic
         player.move();
 
-        //==========Zombie==========
+        //==========Enemy==========
         
-        //Zombie Spawning Logic
+        //Enemy Spawning Logic
         spawn++;
-        if(spawn>300 && zombies.size() < 20) //5seconds at 60FPS and 20 max zombies spawn for now
+        if(spawn>300 && zombies.size() < 20) //5seconds at 60FPS and 20 max Enemy spawn for now
         {
-            int zombie = rand() % 4;
+            int type = rand() % 3;
+            int side  = rand() % 4;
+
             float zombX  = 50;
             float zombY = 10; 
 
@@ -63,6 +66,7 @@ int main()
                 case 1: // bottom
                     zombX = rand() % screenWidth;
                     zombY = screenHeight;
+
                     break;
                     
                 case 2: // left
@@ -73,29 +77,37 @@ int main()
                 case 3: // right
                     zombX = screenWidth;
                     zombY = rand() % screenHeight;
+                
+
+            }
+
+            switch(type)
+            {
+                case 0:
+                    enemies.push_back(new Zombie(zombX,zombY));
+                    break;
+
+                case 1:
+                    enemies.push_back(new FastZombie(zombX,zombY));
+                    break;
+
+                case 2:
+                    enemies.push_back(new TankZombie(zombX,zombY));
                     break;
             }
-             zombies.push_back(Zombie(zombX,zombY));
+            
+            
              spawn = 0;
         }
         
-        //Zombie Move Towards Player Logic
-        //&z is used because we want to make change in the variables of z object
-        for(auto &z: zombies)
+        //Enemy Move Towards Player Logic
+        //&e is used because we want to make change in the variables of e object
+        for(auto &e : enemies)
         {
-            z.moveTowards(player.getX(),player.getY());
-            double dx = player.getX() - z.getX();
-            double dy = player.getY() - z.getY();
-
-            double length = sqrt(pow(dx,2)+ pow(dy,2));
-
-            //To check for collision between zombie and player
-            //The distance between the bodies should be equal to sum of radii of the bodies during collisiom
-            if(length < ((player.getWidth())/2 + z.getRadius())) 
-            {
-                player.takeDamage(z.getDamage());
-            }
+            //Arrow operator used because e is base pointer
+            e->update(player.getX(), player.getY());
         }
+
         /*Alternative of using auto
         for(vector<Zombie>::iterator it = zombies.begin(); it != zombies.end(); ++it) where 'it' is iterator that points towrards zombies[0] till the last  
         */
@@ -155,30 +167,6 @@ int main()
         }
 
 
-       //==========Drawing Logic==========
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        
-        //Player
-        player.draw();
-
-        //Zombie
-        for(auto &z: zombies)
-        {
-            z.draw();
-        }
-
-        //Bullets
-        for(size_t i=0; i<bullets.size(); i++)
-        {
-            bullets[i].drawBullet();
-
-        }
-
-        //HP BAR
-        DrawText(TextFormat("Health: %d", player.getHealth()), 10, 10, 20, RED);
-
-
         //==========Erasing==========
         //Erasing The Useless Bulllets And Zombies
         for(size_t i=0; i<bullets.size(); i++)
@@ -206,10 +194,17 @@ int main()
                 int radius = bullets[i].getRadius() + zombies[j].getRadius();
                 if(length <= radius )
                 {
-                    bullets.erase(bullets.begin() + i);
+                    bullets.erase(bullets.begin()+i);
                     i--;
-                    zombies.erase(zombies.begin() + j);
-                    j--;
+
+                    enemies[j]->takeDamage(50);
+
+
+                    if(!enemies[j]->isAlive())
+                    {
+                        delete enemies[j];
+                        enemies.erase(enemies.begin()+j);
+                    }
 
                     break; //because bullet doesnt exist so skip this bullet loop and move to next
                 }
@@ -218,10 +213,43 @@ int main()
             
         }
 
+       //==========Drawing Logic==========
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        
+        //Player
+        player.draw();
+
+        //Enemy
+        for(auto &e : enemies)
+        {
+            e->draw();
+        }
+
+        //Bullets
+        for(size_t i=0; i<bullets.size(); i++)
+        {
+            bullets[i].drawBullet();
+
+        }
+
+        //HP BAR
+        DrawText(TextFormat("Health: %d", player.getHealth()), 10, 10, 20, RED);
+
+
+
         
         EndDrawing();
 
     }
+
+    //Memory Cleanup
+
+    for(auto e: enemies)
+    {
+        delete e;
+    }
+
 
     CloseWindow();
 
