@@ -19,15 +19,13 @@ class Enemy
     public:
       // Constructor
         Enemy();
-        Enemy(float startX, float startY, int radius);
+        Enemy(float startX, float startY);
 
         //Pure Virtual Functions
         virtual void update(float playerX, float playerY) = 0;
         virtual void draw() = 0;
-
-        //Member Functions
         virtual void takeDamage(int damage) = 0;
-        virtual bool isDead() const = 0; 
+        virtual bool isAlive() const = 0; 
 
         //Getters
         float  getX() const;

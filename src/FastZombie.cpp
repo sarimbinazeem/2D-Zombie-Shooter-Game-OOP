@@ -2,14 +2,19 @@
 
 FastZombie::FastZombie() : Enemy()
 {
-    this->speed = 2.0f; 
-    this->health = 75; 
+    speed = 2.0f; 
+    health = 75; 
+    radius =  15.0f;
+    damage = 7;
+
 }
 
 FastZombie::FastZombie(float x, float y) : Enemy(x, y)
 {
-    this->speed = 2.0f; 
-    this->health = 75; 
+    speed = 2.0f; 
+    health = 75; 
+    radius =  15.0f;
+    damage = 7;
 }
 
 void FastZombie::update(float playerX, float playerY)

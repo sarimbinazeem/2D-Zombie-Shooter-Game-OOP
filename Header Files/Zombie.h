@@ -5,29 +5,22 @@
 
 class Zombie : class Enemy
 {
-    private:
-
-        int damage;
-        int radius;
 
     public:
-    //Zombie Constructor
+         //Zombie Constructor
         Zombie(float posX,float posY);
-
-        //Member Functions
-        void draw();
-        void takeDamage(int dmg);
-        bool isAlive();
-
-        //Getters
-
-        int getDamage();
-        int getRadius();
-        Vector2 getPosition();
 
         //Function overriding
         void update(float playerX, float playerY) override;
         void draw() override;       
+        void takeDamage(int damage) override;
+        bool isAlive() override;
+
+        //Getters
+        int getDamage();
+        int getRadius();
+        Vector2 getPosition();
+
 };
 
 #endif

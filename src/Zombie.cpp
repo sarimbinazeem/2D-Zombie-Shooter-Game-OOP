@@ -8,7 +8,7 @@ Zombie::Zombie(float posX,float posY)
     this->posY = posY;
     speed = 1;
     health = 100;
-    radius = 15;
+    radius = 20;
     damage = 5;
 }
 
