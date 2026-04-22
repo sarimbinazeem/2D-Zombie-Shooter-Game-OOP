@@ -1,7 +1,9 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include <vector>
 #include <iostream>
+#include "raylib.h"
 using namespace std;
 
 class Enemy
@@ -29,9 +31,10 @@ class Enemy
         bool isAlive() const; 
 
         //Getters
-        float  getX() const;
-        float  getY() const;
-
+        int  getDamage() const;
+        int getRadius() const;
+        Vector2 getPosition();
+        
         //Virtual Destructor
         virtual ~Enemy();
 

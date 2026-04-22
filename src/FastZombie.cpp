@@ -1,4 +1,5 @@
 #include "FastZombie.h"
+#include <cmath>
 
 FastZombie::FastZombie() : Enemy()
 {
@@ -19,8 +20,8 @@ FastZombie::FastZombie(float x, float y) : Enemy(x, y)
 
 void FastZombie::update(float playerX, float playerY)
 {
-    float dx = playerX - posX;
-    float dy = playerY - posY;
+    float dx = playerX - x;
+    float dy = playerY - y;
 
     float length = sqrt(pow(dx,2)+ pow(dy,2)); //The distance between Zombie and Player
 
@@ -31,8 +32,8 @@ void FastZombie::update(float playerX, float playerY)
         dy = dy/length;
     }
 
-    posX = posX+ dx*speed;
-    posY = posY + dy*speed;
+    x = x+ dx*speed;
+    y = y + dy*speed;
 }
 
 void FastZombie::draw()

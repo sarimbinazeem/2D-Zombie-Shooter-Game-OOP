@@ -1,4 +1,5 @@
 #include "TankZombie.h"
+#include <cmath>
 using namespace std;
 
 TankZombie::TankZombie(float posX, float posY)
@@ -11,7 +12,7 @@ TankZombie::TankZombie(float posX, float posY)
     radius = 30;
 }
 
-TankZombie::update(float playerX, float playerY)
+void TankZombie::update(float playerX, float playerY)
 {
     float dx = playerX - x;
     float dy = playerY - y;
@@ -25,7 +26,7 @@ TankZombie::update(float playerX, float playerY)
     }
 }
 
-TankZombie::draw()
+void TankZombie::draw()
 {
     DrawCircle(x, y, radius, RED);
 }

@@ -1,6 +1,8 @@
 #include "Enemy.h"
+#include <vector>
 
 Enemy::  Enemy(float startX, float startY)
+{
     x = startX;
     y = startY;
     speed = 1.0f;
@@ -11,15 +13,7 @@ Enemy::  Enemy(float startX, float startY)
 
 Enemy:: ~Enemy() { }
 
-float Enemy::getX()  
-{
-    return x;
-}
 
-float Enemy::getY()  
-{
-    return x;
-}
 
 Enemy::Enemy()
 {
@@ -36,32 +30,23 @@ void Enemy::takeDamage(int dmg)
     health -= dmg;
 }
 
-bool Enemy::isAlive()
+bool Enemy::isAlive() const 
 {
     return health>0;
 }
 
-float Enemy::getX()
-{
-    return posX;
-}
 
-float Enemy::getY()
-{
-    return posY;
-}
-
-int  Enemy::getDamage()
+int  Enemy::getDamage() const
 {
     return damage;
 }
 
-int Enemy::getRadius()
+int Enemy::getRadius() const
 {
     return radius;
 }
 
 Vector2 Enemy::getPosition()
 {
-    return{posX,posY};
+    return{x,y};
 }
