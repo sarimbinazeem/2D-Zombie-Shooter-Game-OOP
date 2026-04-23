@@ -6,11 +6,11 @@ WaveManager::WaveManager()
     wave = 1;
 }
 
-void WaveManager::startWave(vector<Enemy>& enemies, int screenWidth, int screenHeight) 
+void WaveManager::startWave(vector<Enemy*>& enemies, int screenWidth, int screenHeight) 
 {
      int zombiesNum = wave * 3;
 
-    for(int i=0;i<numZombies;i++)
+    for(int i=0;i<zombiesNum;i++)
     {
             int side = rand()%4;
             float zombX  = 50;
@@ -60,20 +60,20 @@ void WaveManager::startWave(vector<Enemy>& enemies, int screenWidth, int screenH
 
             }
             
-             spawn = 0;
-        }
+   
+            
     }
 }
 
 void WaveManager::checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
 {
     //If Zombies Are All Dead Start New Wave
-    if(zombies.empty())
+    if(enemies.empty())
     {
         //Move to Next Wave
         wave++;
 
-        startWave(zombies,screenWidth,creenHeight);
+        startWave(enemies,screenWidth,screenHeight);
     }
 }
 

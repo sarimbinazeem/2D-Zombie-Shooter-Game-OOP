@@ -16,6 +16,9 @@
 #include "Pistol.h"
 #include "Shotgun.h"
 #include  "MachineGun.h"
+
+#include "WaveManager.h"
+
 using namespace std;
 
 int main()
@@ -42,8 +45,13 @@ int main()
     //Bullets  Vector so that there are no limits on creation of bullets 
     vector<Bullet> bullets;
 
-    int spawn = 0 ;
-    
+
+    //Wave Object Creation
+    WaveManager waveManager;
+
+    // starting first wave
+    waveManager.startWave(enemies,screenWidth,screenHeight);
+        
     while(!WindowShouldClose())
     {
         //==========Player==========
@@ -51,63 +59,7 @@ int main()
         player.move();
 
         //==========Enemy==========
-        
-        //Enemy Spawning Logic
-        spawn++;
-        if(spawn>300 && enemies.size() < 20) //5seconds at 60FPS and 20 max Enemy spawn for now
-        {
-            int type = rand() % 3;
-            int side  = rand() % 4;
-
-            float zombX  = 50;
-            float zombY = 10; 
-
-            switch(side)
-            {
-                case 0: // top
-                    zombX = rand() % screenWidth;
-                    zombY = 0;
-                    break;
-                    
-                case 1: // bottom
-                    zombX = rand() % screenWidth;
-                    zombY = screenHeight;
-
-                    break;
-                    
-                case 2: // left
-                    zombX = 0;
-                    zombY = rand() % screenHeight;
-                    break;
-                    
-                case 3: // right
-                    zombX = screenWidth;
-                    zombY = rand() % screenHeight;
-                
-
-            }
-
-            if(type==0)
-            {
-                enemies.push_back(new Zombie(zombX,zombY));
-
-            }
-
-            else if(type==1)
-            {
-
-                enemies.push_back(new FastZombie(zombX,zombY));
-            }
-
-            else
-            {
-                enemies.push_back(new TankZombie(zombX,zombY));
-
-            }
-            
-             spawn = 0;
-        }
-        
+       
         //Enemy Move Towards Player Logic
         //&e is used because we want to make change in the variables of e object
         for(auto &e : enemies)
@@ -121,36 +73,31 @@ int main()
         */
         // ZOMBIES DAMAGE PLAYER
         
-        //After Every Cetain Time The Zombie Hit Player ( NOt evry frame but at a certain time now)
-        double damageTimer = 0;
-        damageTimer++;
+        //After Every Cetain Time The Zombie Hit Player ( NOt evry frame but at a certain time now) 
          static double lastDamageTime = 0;
 
 
         for(size_t i=0; i<enemies.size(); i++)
         {
-    
-            for(size_t i=0; i<enemies.size(); i++)
+            Vector2 enemyPos = enemies[i]->getPosition();
+
+            double dx = player.getX() - enemyPos.x;
+            double dy = player.getY() - enemyPos.y;
+
+            double distance = sqrt(dx*dx + dy*dy);
+
+            if(distance <= player.getWidth()/2 + enemies[i]->getRadius())
             {
-                Vector2 enemyPos = enemies[i]->getPosition();
-
-                double dx = player.getX() - enemyPos.x;
-                double dy = player.getY() - enemyPos.y;
-
-                double dist = sqrt(dx*dx + dy*dy);
-
-                if(dist <= player.getWidth()/2 + enemies[i]->getRadius())
-                {
-                    double currentTime = GetTime();
+                 double currentTime = GetTime();
                     
-                    //Every Half A SECOND later hits player
-                    if(currentTime - lastDamageTime >= 0.5)
-                    {
-                        player.takeDamage(enemies[i]->getDamage());
-                        lastDamageTime = currentTime;
-                    }
+                //Every Half A SECOND later hits player
+                if(currentTime - lastDamageTime >= 0.5)
+                {
+                    player.takeDamage(enemies[i]->getDamage());
+                    lastDamageTime = currentTime;
                 }
             }
+            
         }
 
         //==========Bullet==========
@@ -254,6 +201,9 @@ int main()
             
         }
 
+        //==========Next Wave Logic==========
+        waveManager.checkWaveComplete( enemies,screenWidth,screenHeight);
+
        //==========Drawing Logic==========
         BeginDrawing();
         ClearBackground(RAYWHITE);
@@ -277,7 +227,8 @@ int main()
         //HP BAR
         DrawText(TextFormat("Health: %d", player.getHealth()), 10, 10, 20, RED);
 
-
+        //Wave Number
+        DrawText(TextFormat("Wave: %d",waveManager.getWave()),10,40,20,BLUE);
 
         
         EndDrawing();

@@ -17,9 +17,9 @@ class WaveManager
 
         WaveManager();
 
-        void startWave(vector<Enemy*>& enemies,int screenWidth,int screenHeight);
+        void startWave(vector<Enemy*>& enemies, int screenWidth, int screenHeight) ;
 
-        void checkWaveComplete(vector<Enemy*>& enemies,int screenWidth, int screenHeight);
+        void checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight);
 
         int getWave();
 
