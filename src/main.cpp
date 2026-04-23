@@ -119,25 +119,27 @@ int main()
         /*Alternative of using auto
         for(vector<Zombie>::iterator it = zombies.begin(); it != zombies.end(); ++it) where 'it' is iterator that points towrards zombies[0] till the last  
         */
-        // ZOMBIES DAMAGE PLAYER LOGIC
+        // ZOMBIES DAMAGE PLAYER
+        
+        //After Every Cetain Time The Zombie Hit Player ( NOt evry frame but at a certain time now)
+        double damageTimer = 0;
+        damageTimer++;
+         static double lastDamageTime = 0;
+
 
         for(size_t i=0; i<enemies.size(); i++)
         {
     
             for(size_t i=0; i<enemies.size(); i++)
             {
-                //Enemy position
                 Vector2 enemyPos = enemies[i]->getPosition();
 
-                // Distance Formula to check collision 
                 double dx = player.getX() - enemyPos.x;
                 double dy = player.getY() - enemyPos.y;
 
-                double distance = sqrt(dx*dx + dy*dy);
-                double radius = player.getWidth()/2 + enemies[i]->getRadius();
+                double dist = sqrt(dx*dx + dy*dy);
 
-                //If they collide
-                if(distance <= radius)
+                if(dist <= player.getWidth()/2 + enemies[i]->getRadius())
                 {
                     double currentTime = GetTime();
                     
@@ -145,7 +147,6 @@ int main()
                     if(currentTime - lastDamageTime >= 0.5)
                     {
                         player.takeDamage(enemies[i]->getDamage());
-                        //Update the last damage time to current one
                         lastDamageTime = currentTime;
                     }
                 }
