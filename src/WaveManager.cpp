@@ -64,3 +64,20 @@ void WaveManager::startWave(vector<Enemy>& enemies, int screenWidth, int screenH
         }
     }
 }
+
+void WaveManager::checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
+{
+    //If Zombies Are All Dead Start New Wave
+    if(zombies.empty())
+    {
+        //Move to Next Wave
+        wave++;
+
+        startWave(zombies,screenWidth,creenHeight);
+    }
+}
+
+int WaveManager::getWave()
+{
+    return wave;
+}
