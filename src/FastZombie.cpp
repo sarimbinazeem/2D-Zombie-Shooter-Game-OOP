@@ -41,3 +41,7 @@ void FastZombie::draw()
     DrawCircle(x, y, radius, BLUE);
 }
 
+int FastZombie::getReward()
+{
+    return 20;
+}

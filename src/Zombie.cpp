@@ -39,3 +39,7 @@ void Zombie::update(float playerX, float playerY)
     y = y + dy*speed;
 }
 
+int Zombie::getReward()
+{
+    return 10;
+}

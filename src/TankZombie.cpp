@@ -30,3 +30,8 @@ void TankZombie::draw()
 {
     DrawCircle(x, y, radius, RED);
 }
+
+int TankZombie::getReward()
+{
+    return 50;
+}
