@@ -111,3 +111,32 @@ Weapon* Player::getWeapon()
 {
     return weapon;
 }
+
+Player::Player()
+{
+    health = 100;
+    speed = 5;
+
+    money = 0;
+}
+
+void Player::addMoney(int amount)
+{
+    money += amount;
+}
+
+bool Player::spendMoney(int amount)
+{
+    if(money >= amount)
+    {
+        money -= amount;
+        return true;
+    }
+
+    return false;
+}
+
+int Player::getMoney()
+{
+    return money;
+}
