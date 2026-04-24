@@ -190,7 +190,7 @@ int main()
 
                     if(!enemies[j]->isAlive())
                     {
-                        player.addMoney(enemy->getReward());
+                        player.addMoney(enemies[j]->getReward());
 
                         delete enemies[j];
                         enemies.erase(enemies.begin()+j);
@@ -232,7 +232,8 @@ int main()
         //Wave Number
         DrawText(TextFormat("Wave: %d",waveManager.getWave()),10,40,20,BLUE);
 
-        DrawText(TextFormat("Money: %i", player.getMoney()),20,20,30,YELLOW);
+        //Money
+        DrawText(TextFormat("Money: %d", player.getMoney()),10,70,20,BLACK);
         
         EndDrawing();
 
