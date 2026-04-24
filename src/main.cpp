@@ -19,6 +19,8 @@
 
 #include "WaveManager.h"
 
+#include "Shop.h"
+
 using namespace std;
 
 int main()
@@ -179,12 +181,12 @@ int main()
 
             if(IsKeyPressed(KEY_THREE))
             {
-                shop.buyHealth(player);
+                shop.upgradeHealth(player);
             }
 
             if(IsKeyPressed(KEY_FOUR))
             {
-                shop.buySpeed(player);
+                shop.upgradeHealth(player);
             }
         }
 

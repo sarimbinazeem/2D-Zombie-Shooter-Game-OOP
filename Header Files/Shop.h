@@ -2,8 +2,12 @@
 #define SHOP_H
 
 #include <iostream>
+#include "Player.h"
 using namespace std;
 
+
+
+class Player;
 
 class Shop
 {
@@ -30,3 +34,5 @@ class Shop
         void upgradeHealth(Player& player);
         void upgradeSpeed(Player& player);
 };
+
+#endif

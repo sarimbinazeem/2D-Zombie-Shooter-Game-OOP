@@ -8,6 +8,7 @@ Player::Player()
     health = 100;
     width = 40;
     height = 40;
+    money = 0;
 }
 
 void Player::move()
@@ -112,13 +113,7 @@ Weapon* Player::getWeapon()
     return weapon;
 }
 
-Player::Player()
-{
-    health = 100;
-    speed = 5;
 
-    money = 0;
-}
 
 void Player::addMoney(int amount)
 {
