@@ -267,7 +267,12 @@ int main()
 
         //Money
         DrawText(TextFormat("Money: %d", player.getMoney()),10,70,20,BLACK);
-        
+
+        //Shop
+        if(shop.isOpen())
+        {
+            shop.drawShop();
+        }
         EndDrawing();
 
     }

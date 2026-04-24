@@ -78,3 +78,16 @@ void Shop::upgradeSpeed(Player& player)
         cout<<"Speed Increased\n";
     }
 }
+
+void Shop::drawShop()
+{
+    DrawText("SHOP",300,100,30,BLACK);
+
+    DrawText("1 Shotgun 100",250,150,20,BLACK);
+
+    DrawText("2 Machine Gun 250",250,180,20,BLACK);
+
+    DrawText("3 Health +50 75",250,210,20,BLACK);
+
+    DrawText("4 Speed +1 50",250,240,20,BLACK);
+}
