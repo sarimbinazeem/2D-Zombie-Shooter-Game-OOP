@@ -51,6 +51,9 @@ int main()
 
     // starting first wave
     waveManager.startWave(enemies,screenWidth,screenHeight);
+
+    //Shop object Creation
+    Shop shop;
         
     while(!WindowShouldClose())
     {
@@ -154,6 +157,36 @@ int main()
             }
         }
 
+        //==========Shop==========
+        //Open shop with keyboard shortcut X
+        if(IsKeyPressed(KEY_X))
+        {
+            shop.toggleShop();
+        }
+        
+        //Shope Buying Shortcut
+        if(shop.isOpen())
+        {
+            if(IsKeyPressed(KEY_ONE))
+            {
+                shop.buyShotgun(player);
+            }
+
+            if(IsKeyPressed(KEY_TWO))
+            {
+                shop.buyMachineGun(player);
+            }
+
+            if(IsKeyPressed(KEY_THREE))
+            {
+                shop.buyHealth(player);
+            }
+
+            if(IsKeyPressed(KEY_FOUR))
+            {
+                shop.buySpeed(player);
+            }
+        }
 
         //==========Erasing==========
         //Erasing The Useless Bulllets And Zombies
