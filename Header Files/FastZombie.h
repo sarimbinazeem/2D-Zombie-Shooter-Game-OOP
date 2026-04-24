@@ -14,9 +14,10 @@ class FastZombie : public Enemy
         FastZombie();
         FastZombie(float posX, float posY);
 
-        //Member Functions
-            void update(float playerX, float playerY) override;
-            void draw() override;       
+        //Member Functions Overriden
+        void update(float playerX, float playerY) override;
+        void draw() override; 
+        int getReward() override;      
 
 };
 

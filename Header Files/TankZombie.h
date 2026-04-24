@@ -16,6 +16,7 @@ class TankZombie : public Enemy
         //Function Overriding Polymorphism
         void update(float playerX, float playerY) override;
         void draw() override;
+        int getReward() override;
 };
 
 

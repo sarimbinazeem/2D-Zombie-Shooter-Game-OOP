@@ -13,6 +13,7 @@ class Zombie : public Enemy
         //Function overriding
         void update(float playerX, float playerY) override;
         void draw() override;       
+        int getReward() override;
 
         //Getters
         int getDamage();
