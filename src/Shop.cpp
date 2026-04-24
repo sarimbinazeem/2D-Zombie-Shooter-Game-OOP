@@ -55,3 +55,26 @@ void Shop::buyMachineGun(Player &player)
     }
 }
 
+void Shop::upgradeHealth(Player& player)
+{
+    if(player.getMoney() >= 80)
+    {
+        player.spendMoney(80);
+
+        player.increaseHealth(40);
+
+        cout<<"Health Upgraded\n";
+    }
+}
+
+void Shop::upgradeSpeed(Player& player)
+{
+    if(player.getMoney() >=60)
+    {
+        player.spendMoney(60);
+
+        player.increaseSpeed(1);
+
+        cout<<"Speed Increased\n";
+    }
+}
