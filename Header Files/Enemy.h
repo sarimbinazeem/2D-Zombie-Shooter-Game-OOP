@@ -26,6 +26,7 @@ class Enemy
         //Pure Virtual Functions
         virtual void update(float playerX, float playerY) = 0;
         virtual void draw() = 0;
+        virtual int getReward() = 0;
 
         void takeDamage(int damage);
         bool isAlive() const; 
@@ -34,6 +35,8 @@ class Enemy
         int  getDamage() const;
         int getRadius() const;
         Vector2 getPosition();
+        
+
         
         //Virtual Destructor
         virtual ~Enemy();
