@@ -140,3 +140,13 @@ int Player::getMoney()
 {
     return money;
 }
+
+void Player::increaseHealth(int amount)
+{
+    health += amount;
+}
+
+void Player::increaseSpeed(float amount)
+{
+    speed += amount;
+}

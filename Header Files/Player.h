@@ -41,6 +41,9 @@ class Player
         bool spendMoney(int amount);
         int getMoney();
 
+        void increaseHealth(int amount);
+        void increaseSpeed(float amount);
+
 };
 
 
