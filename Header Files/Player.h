@@ -15,6 +15,8 @@ class Player
         float yPos;
         int width;
         int height;
+        int money;  
+
         Weapon* weapon;
 
     public:
@@ -33,6 +35,11 @@ class Player
         double getWidth();
         double getHeight();
         Weapon* getWeapon();
+
+        
+        void addMoney(int amount);
+        bool spendMoney(int amount);
+        int getMoney();
 
 };
 
