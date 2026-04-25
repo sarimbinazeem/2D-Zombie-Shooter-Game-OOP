@@ -91,13 +91,13 @@ void Shop::drawShop()
 
     DrawText("WEAPON SHOP",300,145,30,RED);
 
-    DrawText("1- Buy Shotgun ($100)",240,200,22,BLACK);
+    DrawText("Q- Buy Shotgun ($100)",240,200,22,BLACK);
 
-    DrawText("2 Buy Machine Gun ($250)",240,240,22,BLACK);
+    DrawText("E Buy Machine Gun ($250)",240,240,22,BLACK);
 
-    DrawText("3 Health Upgrade by +50 ($80)",240,280,22,BLACK);
+    DrawText("R Health Upgrade by +50 ($80)",240,280,22,BLACK);
 
-    DrawText("4 Speed Upgrade by +1 ($50)",240,320,22,BLACK);
+    DrawText("T Speed Upgrade by +1 ($50)",240,320,22,BLACK);
 
     DrawText("Press X to close shop",260,380,20,BLUE);
 }

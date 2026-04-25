@@ -235,7 +235,7 @@ int main()
         //Shope Buying Shortcut
         if(shop.isOpen())
         {
-            if(IsKeyPressed(KEY_ONE))
+            if(IsKeyPressed(KEY_Q))
             {
                 if(player.hasShotgun())
                 {
@@ -244,7 +244,7 @@ int main()
                 }
             }
 
-            if(IsKeyPressed(KEY_TWO))
+            if(IsKeyPressed(KEY_E))
             {
                 if(player.hasMachineGun())
                 {
@@ -253,12 +253,12 @@ int main()
                 }
             }
 
-            if(IsKeyPressed(KEY_THREE))
+            if(IsKeyPressed(KEY_R))
             {
                 shop.upgradeHealth(player);
             }
 
-            if(IsKeyPressed(KEY_FOUR))
+            if(IsKeyPressed(KEY_T))
             {
                 shop.upgradeHealth(player);
             }
