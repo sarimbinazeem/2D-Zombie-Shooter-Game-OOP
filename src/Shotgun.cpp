@@ -13,3 +13,8 @@ double Shotgun::getRate()
 {
     return 1.2; // Slower
 }
+
+const char* Shotgun::getName()
+{
+   return "Shotgun";
+}

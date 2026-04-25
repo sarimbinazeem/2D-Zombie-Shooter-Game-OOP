@@ -28,18 +28,18 @@ class Player
         void move();
         void draw();
         void takeDamage(double damage);
-        int getHealth();
 
+        int getHealth();
         float getX();
         float getY();
         double getWidth();
         double getHeight();
         Weapon* getWeapon();
+        int getMoney();
 
         
         void addMoney(int amount);
         bool spendMoney(int amount);
-        int getMoney();
 
         void increaseHealth(int amount);
         void increaseSpeed(float amount);

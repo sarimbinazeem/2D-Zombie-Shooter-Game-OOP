@@ -11,3 +11,8 @@ double Pistol::getRate()
 {
     return 0.5; //Slow
 }
+
+const char* Pistol::getName()
+{
+   return "Pistol";
+}

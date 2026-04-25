@@ -10,3 +10,8 @@ double MachineGun::getRate()
 {
     return 0.2; // Fast
 }
+
+const char* MachineGun::getName()
+{
+   return "Machine Gun";
+}
