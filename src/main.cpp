@@ -410,7 +410,7 @@ int main()
             
         }
             
-        EndDrawing();
+        
         else if(gameState == GAME_OVER)
         {
             DrawText("GAME OVER",280,180,60,RED);
@@ -449,6 +449,7 @@ int main()
                 gameState = PLAYING;
             }
         }
+         EndDrawing();
         
     }
 
@@ -462,7 +463,7 @@ int main()
 
 
 
-
+   
 
     CloseWindow();
 
