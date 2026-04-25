@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <vector>
 #include <cmath>
+#include <ctime>
 #include "raylib.h"
 #include "Player.h"
 
@@ -22,6 +23,8 @@
 #include "Shop.h"
 
 #include "HUD.h"
+
+#include "FileManager.h"
 
 using namespace std;
 
@@ -61,7 +64,61 @@ int main()
 
     //Shop object Creation
     Shop shop;
-        
+    
+    //File Manager Object Creation
+     FileManager file;
+     file.loadData();  
+    //time_t is used to store time in unreadable form
+    time_t now = time(0); //time(0) gives time right now
+    
+    //tm is a structure having day of week, hour, mins, seconds
+    tm *ltm = localtime(&now); //This converts time in unreadable parts into readable parts
+    
+    //days array
+    string days[] = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+
+    //ltm->tm_wday tells current day of the week
+    string currentDay = days[ltm->tm_wday];
+    
+    //it tells hour and minutes that are stored in the respective ltm structure
+    int hour = ltm->tm_hour;
+    int minute = ltm->tm_min;
+    
+    //Hard Coding Am at first
+    string ampm="AM";
+    
+    //if greater than 12 than it is pm
+    if(hour>=12)
+    {
+        ampm="PM";
+    }
+    
+    //if it is greater than 12 than minus by 12 (in no 24 hours format)
+    if(hour>12)
+    {
+        hour-=12;
+    }
+    
+    //if hour is 0 than it means it is 12 am
+    if(hour==0)
+    {
+        hour=12;
+    }
+    
+    //FOr minute
+    string minuteText;
+
+    if(minute<10)
+    {
+       minuteText="0"+to_string(minute); //gives minute in 05 format
+    }
+    
+    else
+    {
+       minuteText=to_string(minute); 
+    }
+    
+    string currentTime=to_string(hour)+":"+minuteText+ampm; //concatened string for format 5:00pm
     while(!WindowShouldClose())
     {
         //==========Player==========
@@ -245,6 +302,9 @@ int main()
 
         //==========Next Wave Logic==========
         waveManager.checkWaveComplete( enemies,screenWidth,screenHeight);
+        
+        //Saving the data into the file
+        file.saveData(waveManager.getWave(),player.getMoney(),player.getWeapon()->getName(),currentDay,currentTime);
 
        //==========Drawing Logic==========
         BeginDrawing();
@@ -269,19 +329,35 @@ int main()
         //HUD drawing
         hud.draw(player,waveManager);
 
-        DrawText(TextFormat("Record Wave: %i",file.getHighWave()),20, 110, 20, BLACK);
+        DrawRectangle(560,15,220,110,LIGHTGRAY);
+        DrawRectangleLines(560,15,220,110,BLACK);
 
-        DrawText(TextFormat("Best Weapon: %s",file.getBestWeapon().c_str()),20, 140, 20, BLACK);
+        DrawText("=== RECORDS ===",590,25,20,DARKBLUE);
 
-        DrawText(TextFormat("Record Set: %s %s", file.getRecordDay().c_str(),file.getRecordTime().c_str()),20, 170, 20, BLACK);
+        DrawText(
+        TextFormat("Wave: %i",file.getHighWave()),
+        580,55,20,BLACK);
+
+        DrawText(
+        TextFormat("Weapon: %s",
+        file.getBestWeapon().c_str()),
+        580,80,20,BLACK);
+
+        DrawText(
+        TextFormat("%s %s",
+        file.getRecordDay().c_str(),
+        file.getRecordTime().c_str()),
+        580,105,18,BLACK);
 
         //Shop
         if(shop.isOpen())
         {
             shop.drawShop();
         }
+        
+        
         EndDrawing();
-
+    
     }
 
     //Memory Cleanup
@@ -290,6 +366,10 @@ int main()
     {
         delete e;
     }
+    
+
+
+
 
 
     CloseWindow();
