@@ -186,15 +186,24 @@ int main()
         //Weapon Switching Logic
         if(IsKeyPressed(KEY_ONE))
         {
+            
             player.setWeapon(&pistol);
         }
         else if(IsKeyPressed(KEY_TWO))        
         {
-            player.setWeapon(&shotgun);
+            if(player.hasShotgun())
+            {
+                 player.setWeapon(&shotgun);
+
+            }
         }
         else if(IsKeyPressed(KEY_THREE))
         {
-            player.setWeapon(&machineGun);
+            if(player.hasMachineGun())
+            {
+                player.setWeapon(&machineGun);
+
+            }
         }
 
         //Fire Rate Logic
@@ -237,20 +246,14 @@ int main()
         {
             if(IsKeyPressed(KEY_Q))
             {
-                if(player.hasShotgun())
-                {
-                    shop.buyShotgun(player);
+                 shop.buyShotgun(player);
 
-                }
             }
 
             if(IsKeyPressed(KEY_E))
-            {
-                if(player.hasMachineGun())
-                {
-                    shop.buyMachineGun(player);
+            { 
+                  shop.buyMachineGun(player);
 
-                }
             }
 
             if(IsKeyPressed(KEY_R))
@@ -347,7 +350,7 @@ int main()
 
         if(IsKeyDown(KEY_TAB))
         {
-            int recordWidth = 220;
+            int recordWidth = 270;
             int recordHeight = 110;
                
             //Midpoint
