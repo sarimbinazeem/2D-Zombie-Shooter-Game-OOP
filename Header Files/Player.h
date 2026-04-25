@@ -17,6 +17,9 @@ class Player
         int height;
         int money;  
 
+        bool shotgunUnlocked;
+        bool machineGunUnlocked;
+
         Weapon* weapon;
 
     public:

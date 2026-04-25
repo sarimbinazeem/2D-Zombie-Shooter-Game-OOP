@@ -9,6 +9,9 @@ Player::Player()
     width = 40;
     height = 40;
     money = 0;
+
+    shotgunUnlocked = false;
+    machineGunUnlocked = false;
 }
 
 void Player::move()
