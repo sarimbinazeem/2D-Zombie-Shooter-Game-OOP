@@ -59,29 +59,29 @@ void WaveManager::spawnGradually( vector<Enemy*>& enemies,int screenWidth,int sc
 
     int side = rand()%4;
 
-    float zombX;
-    float zombY;
+    float zombX =screenHeight;
+    float zombY = screenWidth;
 
     switch(side)
     {
         case 0: // top
-            zombX = rand()%screenWidth;
-            zombY = 0;
+            zombX = screenWidth/2;
+            zombY = 0; //Spawning outside frame so it can spawn at extreme edges
             break;
 
         case 1: // bottom
-            zombX = rand()%screenWidth;
+            zombX = screenWidth/2;
             zombY = screenHeight;
             break;
 
         case 2: // left
             zombX = 0;
-            zombY = rand()%screenHeight;
+            zombY = screenHeight/2;
             break;
 
         case 3: // right
             zombX = screenWidth;
-            zombY = rand()%screenHeight;
+            zombY = screenHeight/2;
             break;
     }
 
