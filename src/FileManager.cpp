@@ -26,3 +26,34 @@ void FileManager::loadData()
         inFile.close();
     }
 }
+
+void FileManager::saveData(int currentWave,int currentScore,string currentWeapon,string day,string time)
+{
+
+    if(currentWave > highWave)
+    {
+        highWave = currentWave;
+        bestWeapon = currentWeapon;
+        recordDay = day;
+        recordTime = time;
+    }
+
+
+    if(currentScore > highScore)
+    {
+        highScore=currentScore;
+    }
+
+
+    ofstream outFile("save.txt");
+
+    outFile << highWave << endl;
+    outFile << highScore << endl;
+    outFile << recordDay << endl;
+    outFile << recordTime << endl;
+    outFile << bestWeapon << endl;
+
+    outFile.close();
+
+}
+
