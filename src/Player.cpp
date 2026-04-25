@@ -148,3 +148,23 @@ void Player::increaseSpeed(float amount)
 {
     speed += amount;
 }
+
+void Player::unlockShotgun()
+{
+    shotgunUnlocked = true;
+}
+
+void Player::unlockMachineGun()
+{
+    machineGunUnlocked = true;
+}
+
+bool Player::hasShotgun()
+{
+    return shotgunUnlocked;
+}
+
+bool Player::hasMachineGun()
+{
+    return machineGunUnlocked;
+}

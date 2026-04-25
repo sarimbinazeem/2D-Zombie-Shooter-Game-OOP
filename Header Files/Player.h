@@ -47,6 +47,12 @@ class Player
         void increaseHealth(int amount);
         void increaseSpeed(float amount);
 
+        void unlockShotgun();
+        void unlockMachineGun();
+
+        bool hasShotgun();
+        bool hasMachineGun();
+
 };
 
 
