@@ -54,6 +54,9 @@ int main()
     // starting first wave
     waveManager.startWave(enemies,screenWidth,screenHeight);
 
+    //HUD object
+    HUD hud;
+
     //Shop object Creation
     Shop shop;
         
@@ -261,14 +264,8 @@ int main()
 
         }
 
-        //HP BAR
-        DrawText(TextFormat("Health: %d", player.getHealth()), 10, 10, 20, RED);
-
-        //Wave Number
-        DrawText(TextFormat("Wave: %d",waveManager.getWave()),10,40,20,BLUE);
-
-        //Money
-        DrawText(TextFormat("Money: %d", player.getMoney()),10,70,20,BLACK);
+        //HUD drawing
+        hud.draw(player,waveManager);
 
         //Shop
         if(shop.isOpen())
