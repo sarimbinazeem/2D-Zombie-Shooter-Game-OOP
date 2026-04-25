@@ -69,7 +69,7 @@ int main()
     WaveManager waveManager;
 
     // starting first wave
-    waveManager.startWave(enemies,screenWidth,screenHeight);
+    waveManager.startWave();
 
     //HUD object
     HUD hud;
@@ -444,7 +444,7 @@ int main()
 
                 //  WAVES
                 waveManager = WaveManager();
-                waveManager.startWave(enemies,screenWidth,screenHeight);
+                waveManager.startWave();
 
                 // Start playing agaibn
                 gameState = PLAYING;

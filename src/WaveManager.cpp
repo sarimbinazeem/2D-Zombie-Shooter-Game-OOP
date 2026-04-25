@@ -4,28 +4,28 @@
 WaveManager::WaveManager() 
 {
     wave = 1;
-    zombiesRemainingToSpawn = 0;
+    zombiesRemaining = 0;
     spawnTimer = 0.0f;
-    spawnDelay = 0.5f;
+    spawnDelay = 1.0f;
 }
 
 void WaveManager::startWave() 
 {
     //Increasing zombies number per wave number
-    zombiesRemainingToSpawn = wave * 3;
+    zombiesRemaining = wave * 3;
   
-    }
+    
 }
 
 void WaveManager::checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
 {
     //If Zombies Are All Dead Start New Wave
-    if(enemies.empty() &&zombiesRemainingToSpawn==0)
+    if(enemies.empty() &&zombiesRemaining==0)
     {
         //Move to Next Wave
         wave++;
 
-        startWave(enemies,screenWidth,screenHeight);
+        startWave();
     }
 }
 
@@ -36,60 +36,72 @@ int WaveManager::getWave()
 
 void WaveManager::spawnGradually( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
 {
-         int zombiesNum = wave * 3;
+     // Add elapsed frame time
+    spawnTimer += GetFrameTime();
 
-    for(int i=0;i<zombiesNum;i++)
+    // Spawn timer should pass SPAWN delay
+    if(spawnTimer < spawnDelay)
     {
-            int side = rand()%4;
-            float zombX  = 50;
-            float zombY = 10; 
-
-            switch(side)
-            {
-                case 0: // top
-                    zombX = rand() % screenWidth;
-                    zombY = 0;
-                    break;
-                    
-                case 1: // bottom
-                    zombX = rand() % screenWidth;
-                    zombY = screenHeight;
-
-                    break;
-                    
-                case 2: // left
-                    zombX = 0;
-                    zombY = rand() % screenHeight;
-                    break;
-                    
-                case 3: // right
-                    zombX = screenWidth;
-                    zombY = rand() % screenHeight;
-                    break;
-                
-
-            }
-
-            if(wave >= 3 && rand()%5 == 0)  // rand%5 == 0 means 20% chance to spawn a fast zombie
-            {
-                enemies.push_back(new TankZombie(zombX,zombY));
-
-            }
-
-            else if(wave >= 2 && rand()%3 == 0) //rand%3 == 0 means 33% chance to spawn a fast zombie 
-            {
-
-                enemies.push_back(new FastZombie(zombX,zombY));
-            }
-
-            else
-            {
-                enemies.push_back(new Zombie(zombX,zombY));
-
-            }
-            
-         zombiesRemainingToSpawn--;
-
-        spawnTimer=0;
+        return;
     }
+
+    // Stop if all zombies for this wave have spawned
+    if(zombiesRemaining <= 0)
+    {
+        return;
+    }
+
+    // reset timer for next spawn
+    spawnTimer = 0;
+
+
+    // -------- Spawn ONE zombie only --------
+
+    int side = rand()%4;
+
+    float zombX;
+    float zombY;
+
+    switch(side)
+    {
+        case 0: // top
+            zombX = rand()%screenWidth;
+            zombY = 0;
+            break;
+
+        case 1: // bottom
+            zombX = rand()%screenWidth;
+            zombY = screenHeight;
+            break;
+
+        case 2: // left
+            zombX = 0;
+            zombY = rand()%screenHeight;
+            break;
+
+        case 3: // right
+            zombX = screenWidth;
+            zombY = rand()%screenHeight;
+            break;
+    }
+
+
+    if(wave >=3 && rand()%5==0)
+    {
+        enemies.push_back(new TankZombie(zombX,zombY));
+    }
+
+    else if(wave>=2 && rand()%3==0)
+    {
+        enemies.push_back(new FastZombie(zombX,zombY));
+    }
+
+    else
+    {
+        enemies.push_back( new Zombie(zombX,zombY));
+    }
+
+
+    zombiesRemaining--;
 }
+    

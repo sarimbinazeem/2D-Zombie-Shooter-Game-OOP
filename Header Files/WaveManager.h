@@ -20,7 +20,7 @@ class WaveManager
 
         WaveManager();
 
-        void startWave() ;
+        void startWave();
 
         void checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight);
 
