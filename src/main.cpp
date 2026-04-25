@@ -237,12 +237,20 @@ int main()
         {
             if(IsKeyPressed(KEY_ONE))
             {
-                shop.buyShotgun(player);
+                if(player.hasShotgun())
+                {
+                    shop.buyShotgun(player);
+
+                }
             }
 
             if(IsKeyPressed(KEY_TWO))
             {
-                shop.buyMachineGun(player);
+                if(player.hasMachineGun())
+                {
+                    shop.buyMachineGun(player);
+
+                }
             }
 
             if(IsKeyPressed(KEY_THREE))
