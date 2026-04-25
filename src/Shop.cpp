@@ -25,7 +25,8 @@ bool Shop::isOpen()
 
 void Shop::buyShotgun(Player &player)
 {
-    if(player.getMoney() >= 200)
+    //It checks if player has the required money and have no shotgun
+    if(player.getMoney() >= 200 && !player.hasShotgun())
     {
         player.spendMoney(200);
 
@@ -41,7 +42,7 @@ void Shop::buyShotgun(Player &player)
 
 void Shop::buyMachineGun(Player &player)
 {
-    if(player.getMoney() >= 400)
+    if(player.getMoney() >= 400 && !player.hasMachineGun())
     {
         player.spendMoney(400);
 
