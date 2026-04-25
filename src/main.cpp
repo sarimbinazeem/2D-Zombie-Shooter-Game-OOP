@@ -28,6 +28,18 @@
 
 using namespace std;
 
+
+enum GameState
+{
+    MENU, //0th index
+    PLAYING, //1st index
+    GAME_OVER //2nd index
+};
+
+//Default start with MENU
+GameState gameState = MENU;
+
+
 int main()
 {
     const int screenWidth = 800;
@@ -322,8 +334,16 @@ int main()
         file.saveData(waveManager.getWave(),player.getMoney(),player.getWeapon()->getName(),currentDay,currentTime);
 
        //==========Drawing Logic==========
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
+        if (currentState == MENU)
+        {
+            DrawText("2D ZOMBIE SHOOTER", 300, 150, 40, DARKGREEN);
+            DrawText("PRESS ENTER TO START", 300, 300, 20, BLACK);
+
+            if (IsKeyPressed(KEY_ENTER))
+            {
+                currentState = PLAYING;
+            }
+        }
         
         //Player
         player.draw();
