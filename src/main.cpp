@@ -21,6 +21,8 @@
 
 #include "Shop.h"
 
+#include "HUD.h"
+
 using namespace std;
 
 int main()

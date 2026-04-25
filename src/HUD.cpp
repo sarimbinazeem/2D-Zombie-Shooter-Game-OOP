@@ -18,7 +18,7 @@ void HUD::draw(Player& player, WaveManager& waves)
     DrawRectangle(20,20,200,20,GRAY);
 
     //Changing of color of health bar accordinng to health
-    string healthColor;
+    Color healthColor;  //color class object health color
     if(player.getHealth()>50)
     {
           healthColor=GREEN;
