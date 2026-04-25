@@ -57,3 +57,27 @@ void FileManager::saveData(int currentWave,int currentScore,string currentWeapon
 
 }
 
+int FileManager::getHighWave()
+{
+   return highWave;
+}
+
+int FileManager::getHighScore()
+{
+   return highScore;
+}
+
+string FileManager::getRecordDay()
+{
+   return recordDay;
+}
+
+string FileManager::getRecordTime()
+{
+   return recordTime;
+}
+
+string FileManager::getBestWeapon()
+{
+   return bestWeapon;
+}
