@@ -349,12 +349,13 @@ int main()
             }
 
             //==========Next Wave Logic==========
+            waveManager.spawnGradually(enemies,screenWidth,screenHeight);
             waveManager.checkWaveComplete( enemies,screenWidth,screenHeight);
             
             //Saving the data into the file
             file.saveData(waveManager.getWave(),player.getMoney(),player.getWeapon()->getName(),currentDay,currentTime);
 
-         //==========Drawing Logic==========
+             //==========Drawing Logic==========
             
             //Player
             player.draw();

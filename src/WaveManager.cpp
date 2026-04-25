@@ -4,11 +4,39 @@
 WaveManager::WaveManager() 
 {
     wave = 1;
+    zombiesRemainingToSpawn = 0;
+    spawnTimer = 0.0f;
+    spawnDelay = 0.5f;
 }
 
-void WaveManager::startWave(vector<Enemy*>& enemies, int screenWidth, int screenHeight) 
+void WaveManager::startWave() 
 {
-     int zombiesNum = wave * 3;
+    //Increasing zombies number per wave number
+    zombiesRemainingToSpawn = wave * 3;
+  
+    }
+}
+
+void WaveManager::checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
+{
+    //If Zombies Are All Dead Start New Wave
+    if(enemies.empty() &&zombiesRemainingToSpawn==0)
+    {
+        //Move to Next Wave
+        wave++;
+
+        startWave(enemies,screenWidth,screenHeight);
+    }
+}
+
+int WaveManager::getWave()
+{
+    return wave;
+}
+
+void WaveManager::spawnGradually( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
+{
+         int zombiesNum = wave * 3;
 
     for(int i=0;i<zombiesNum;i++)
     {
@@ -60,24 +88,8 @@ void WaveManager::startWave(vector<Enemy*>& enemies, int screenWidth, int screen
 
             }
             
-   
-            
+         zombiesRemainingToSpawn--;
+
+        spawnTimer=0;
     }
-}
-
-void WaveManager::checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
-{
-    //If Zombies Are All Dead Start New Wave
-    if(enemies.empty())
-    {
-        //Move to Next Wave
-        wave++;
-
-        startWave(enemies,screenWidth,screenHeight);
-    }
-}
-
-int WaveManager::getWave()
-{
-    return wave;
 }

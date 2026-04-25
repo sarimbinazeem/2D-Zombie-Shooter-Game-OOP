@@ -11,17 +11,22 @@ using namespace std;
 class WaveManager
 {
     private:
+        int zombiesRemaining;
+        float spawnTimer;
+        float spawnDelay;
         int wave;
 
     public:
 
         WaveManager();
 
-        void startWave(vector<Enemy*>& enemies, int screenWidth, int screenHeight) ;
+        void startWave() ;
 
         void checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight);
 
         int getWave();
+
+        void spawnGradually(vector<Enemy*>& enemies,int screenWidth,int screenHeight);
 
 };
 
