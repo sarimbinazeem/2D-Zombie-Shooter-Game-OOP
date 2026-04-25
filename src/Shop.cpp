@@ -81,13 +81,22 @@ void Shop::upgradeSpeed(Player& player)
 
 void Shop::drawShop()
 {
-    DrawText("SHOP",300,100,30,BLACK);
+    //To Dim The Background Gameplay
+    DrawRectangle(0,0,800,600,Fade(BLACK,0.4));
 
-    DrawText("1 Shotgun 100",250,150,20,BLACK);
+    //Shop in rectangle background
+    DrawRectangle(200,120,400,300,LIGHTGRAY);
+    DrawRectangleLines(200,120,400,300,BLACK);
 
-    DrawText("2 Machine Gun 250",250,180,20,BLACK);
+    DrawText("WEAPON SHOP",300,145,30,RED);
 
-    DrawText("3 Health +50 75",250,210,20,BLACK);
+    DrawText("1- Buy Shotgun ($100)",240,200,22,BLACK);
 
-    DrawText("4 Speed +1 50",250,240,20,BLACK);
+    DrawText("2 Buy Machine Gun ($250)",240,240,22,BLACK);
+
+    DrawText("3 Health Upgrade by +50 ($80)",240,280,22,BLACK);
+
+    DrawText("4 Speed Upgrade by +1 ($50)",240,320,22,BLACK);
+
+    DrawText("Press X to close shop",260,380,20,BLUE);
 }
