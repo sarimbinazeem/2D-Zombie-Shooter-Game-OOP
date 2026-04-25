@@ -142,9 +142,9 @@ int main()
 
         if(gameState == MENU)
         {
-            DrawText("2D ZOMBIE SHOOTER",250,180,40,DARKGREEN);
+            DrawText("2D ZOMBIE SHOOTER",95,180,60,DARKGREEN);
 
-            DrawText("PRESS ENTER TO START",260,280,30,BLACK);
+            DrawText("PRESS ENTER TO START",150,250,40,BLACK);
 
             if(IsKeyPressed(KEY_ENTER))
             {
@@ -413,11 +413,11 @@ int main()
         
         else if(gameState == GAME_OVER)
         {
-            DrawText("GAME OVER",280,180,60,RED);
+            DrawText("GAME OVER",215,180,60,RED);
 
-            DrawText(TextFormat("Wave Reached: %d",waveManager.getWave()),280,260,30,BLACK);
+            DrawText(TextFormat("Wave Reached: %d",waveManager.getWave()),265,260,30,BLACK);
 
-            DrawText("PRESS Z TO RESTART",250,340,30,DARKBLUE);
+            DrawText("PRESS Z TO RESTART",223,340,30,DARKBLUE);
 
 
             if(IsKeyPressed(KEY_Z))
