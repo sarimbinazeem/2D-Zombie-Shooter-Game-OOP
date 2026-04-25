@@ -68,6 +68,8 @@ int main()
     //File Manager Object Creation
      FileManager file;
      file.loadData();  
+
+     //File Times
     //time_t is used to store time in unreadable form
     time_t now = time(0); //time(0) gives time right now
     
@@ -119,6 +121,8 @@ int main()
     }
     
     string currentTime=to_string(hour)+":"+minuteText+ampm; //concatened string for format 5:00pm
+
+
     while(!WindowShouldClose())
     {
         //==========Player==========
@@ -329,25 +333,32 @@ int main()
         //HUD drawing
         hud.draw(player,waveManager);
 
-        DrawRectangle(560,15,220,110,LIGHTGRAY);
-        DrawRectangleLines(560,15,220,110,BLACK);
 
-        DrawText("=== RECORDS ===",590,25,20,DARKBLUE);
 
-        DrawText(
-        TextFormat("Wave: %i",file.getHighWave()),
-        580,55,20,BLACK);
+        //======File-======
 
-        DrawText(
-        TextFormat("Weapon: %s",
-        file.getBestWeapon().c_str()),
-        580,80,20,BLACK);
+        if(IsKeyDown(KEY_TAB))
+        {
+            int recordWidth = 220;
+            int recordHeight = 110;
+               
+            //Midpoint
+            int x = (screenWidth -recordWidth)/2;
+            int y = (screenHeight - recordHeight)/2;
+            
+            DrawRectangle(x,y,recordWidth,recordHeight,LIGHTGRAY);
+            DrawRectangleLines(x,y,recordWidth,recordHeight,BLACK);
+            
+            DrawText("=== RECORDS ===",x + 40, y + 10,20,DARKBLUE);
 
-        DrawText(
-        TextFormat("%s %s",
-        file.getRecordDay().c_str(),
-        file.getRecordTime().c_str()),
-        580,105,18,BLACK);
+            DrawText(TextFormat("Wave: %d",file.getHighWave()),x + 20, y + 40,20,BLACK);
+
+            //c_str() turns string to const char* because DrawText only accepts const char* and not string
+            DrawText( TextFormat("Weapon: %s",file.getBestWeapon().c_str()),x + 20,y + 65,20,BLACK);
+
+            DrawText(TextFormat("%s %s",file.getRecordDay().c_str(),file.getRecordTime().c_str()),x + 20,y + 90,18,BLACK);
+
+        }
 
         //Shop
         if(shop.isOpen())
