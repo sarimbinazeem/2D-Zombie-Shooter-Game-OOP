@@ -269,6 +269,12 @@ int main()
         //HUD drawing
         hud.draw(player,waveManager);
 
+        DrawText(TextFormat("Record Wave: %i",file.getHighWave()),20, 110, 20, BLACK);
+
+        DrawText(TextFormat("Best Weapon: %s",file.getBestWeapon().c_str()),20, 140, 20, BLACK);
+
+        DrawText(TextFormat("Record Set: %s %s", file.getRecordDay().c_str(),file.getRecordTime().c_str()),20, 170, 20, BLACK);
+
         //Shop
         if(shop.isOpen())
         {
