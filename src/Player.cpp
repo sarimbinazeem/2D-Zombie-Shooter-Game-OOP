@@ -205,3 +205,9 @@ Player::~Player()
     UnloadTexture(shotgunTexture);
     UnloadTexture(machineGunTexture);
 }
+
+Player& Player::operator+=(int reward)
+{
+    money += reward;
+    return *this;
+}

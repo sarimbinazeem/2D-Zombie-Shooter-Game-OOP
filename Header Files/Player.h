@@ -59,6 +59,11 @@ class Player
         bool hasShotgun();
         bool hasMachineGun();
 
+        friend class Shop; 
+
+        Player& operator+=(int reward);
+
+        
         ~Player();
 
 };

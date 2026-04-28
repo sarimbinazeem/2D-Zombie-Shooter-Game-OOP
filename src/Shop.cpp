@@ -62,7 +62,8 @@ void Shop::upgradeHealth(Player& player)
     {
         player.spendMoney(80);
 
-        player.increaseHealth(40);
+        //friend class
+        player.health += 25;
 
         cout<<"Health Upgraded\n";
     }
@@ -74,7 +75,8 @@ void Shop::upgradeSpeed(Player& player)
     {
         player.spendMoney(60);
 
-        player.increaseSpeed(1);
+        //friend class
+        player.speed +=1;
 
         cout<<"Speed Increased\n";
     }
@@ -95,7 +97,7 @@ void Shop::drawShop()
 
     DrawText("E Buy Machine Gun ($400)",240,240,22,BLACK);
 
-    DrawText("R Health Upgrade by +50 ($80)",240,280,22,BLACK);
+    DrawText("R Health Upgrade by +25 ($80)",240,280,22,BLACK);
 
     DrawText("T Speed Upgrade by +1 ($60)",240,320,22,BLACK);
 

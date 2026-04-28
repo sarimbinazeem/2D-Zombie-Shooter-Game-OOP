@@ -340,7 +340,7 @@ int main()
 
                         if(!enemies[j]->isAlive())
                         {
-                            player.addMoney(enemies[j]->getReward());
+                            player += enemies[j]->getReward(); 
 
                             delete enemies[j];
                             enemies.erase(enemies.begin()+j);
