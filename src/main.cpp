@@ -47,6 +47,7 @@ int main()
 
     InitWindow(screenWidth,screenHeight,"2D-Zombie Shooter Game");
     SetTargetFPS(60);
+    InitAudioDevice();
 
     //Player Creation
     Player player;
@@ -137,9 +138,18 @@ int main()
     //Background Image
     Texture2D background= LoadTexture("Assets/background.png");
 
+    //Audio
+    Music bgMusic = LoadMusicStream("Assets/music.mp3");
+
+    Sound zombieHitSound = LoadSound("Assets/zombiehit.wav");
+
+    Sound gameOverSound = LoadSound("Assets/gameover.wav");
+
+    PlayMusicStream(bgMusic);
 
     while(!WindowShouldClose())
     {
+        UpdateMusicStream(bgMusic);
         BeginDrawing();
         
 
@@ -152,7 +162,9 @@ int main()
 
             if(IsKeyPressed(KEY_ENTER))
             {
+                StopMusicStream(bgMusic);
                 gameState = PLAYING;
+
             }
         }
         else if(gameState == PLAYING)
@@ -201,6 +213,7 @@ int main()
                         if(player.getHealth() <= 0)
                         {
                             gameState = GAME_OVER;
+                            PlaySound(gameOverSound);
                         }
                         lastDamageTime = currentTime;
                     }
@@ -336,7 +349,7 @@ int main()
 
 
                         enemies[j]->takeDamage(50);
-
+                        PlaySound(zombieHitSound);
 
                         if(!enemies[j]->isAlive())
                         {
@@ -431,7 +444,7 @@ int main()
             {
                 //Resetting everything
                 //  PLAYER
-                player = Player();
+                player.reset();
 
                 //  WEAPON
                 player.setWeapon(&pistol);
@@ -471,9 +484,10 @@ int main()
 
 
    
-
+    UnloadSound(zombieHitSound);
+    UnloadSound(gameOverSound);
     CloseWindow();
-
+    CloseAudioDevice();
     return 0;
 
 }

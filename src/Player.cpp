@@ -211,3 +211,17 @@ Player& Player::operator+=(int reward)
     money += reward;
     return *this;
 }
+
+void Player::reset()
+{
+    xPos = 400;
+    yPos = 300;
+    speed = 5;
+    health = 100;
+    money = 0;
+
+    shotgunUnlocked = false;
+    machineGunUnlocked = false;
+
+    weapon = nullptr;
+}

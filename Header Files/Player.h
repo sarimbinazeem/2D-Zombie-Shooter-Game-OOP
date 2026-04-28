@@ -63,7 +63,8 @@ class Player
 
         Player& operator+=(int reward);
 
-        
+        void reset();
+
         ~Player();
 
 };
