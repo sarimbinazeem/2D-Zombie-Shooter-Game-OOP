@@ -19,6 +19,9 @@ Player::Player()
     shotgunTexture = LoadTexture("Assets/shotgun.png");
 
     machineGunTexture = LoadTexture("Assets/machinegun.png");
+    
+    weapon = nullptr;
+  
 }
 
 void Player::move()
@@ -68,6 +71,12 @@ void Player::move()
 
 void Player::draw()
 {
+        if(weapon == nullptr)
+        {
+            DrawTexture(pistolTexture,xPos,yPos,WHITE);
+            return;
+        }
+        
         if(strcmp(weapon->getName(),"Pistol")==0)
         {
             DrawTexture(pistolTexture,xPos,yPos,WHITE);
@@ -120,6 +129,7 @@ double Player::getHeight()
 
 void Player::setWeapon(Weapon* newWeapon)
 {
+
     weapon = newWeapon;
 }
 

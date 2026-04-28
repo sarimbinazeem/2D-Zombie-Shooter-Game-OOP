@@ -419,7 +419,7 @@ int main()
         
         else if(gameState == GAME_OVER)
         {
-            
+            ClearBackground(DARKGREEN);
             DrawText("GAME OVER",215,180,60,RED);
 
             DrawText(TextFormat("Wave Reached: %d",waveManager.getWave()),265,260,30,BLACK);

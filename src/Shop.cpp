@@ -30,7 +30,7 @@ void Shop::buyShotgun(Player &player)
     {
         player.spendMoney(200);
 
-        player.setWeapon(new Shotgun());
+        player.unlockShotgun();
 
         cout<<"You bought a Shotgun!"<<endl;
     }
@@ -46,7 +46,7 @@ void Shop::buyMachineGun(Player &player)
     {
         player.spendMoney(400);
 
-        player.setWeapon(new MachineGun());
+        player.unlockMachineGun();
 
         cout<<"You bought a Machine Gun!"<<endl;
     }
