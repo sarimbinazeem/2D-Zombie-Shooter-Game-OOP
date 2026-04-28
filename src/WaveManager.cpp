@@ -59,8 +59,8 @@ void WaveManager::spawnGradually( vector<Enemy*>& enemies,int screenWidth,int sc
 
     int side = rand()%4;
 
-    float zombX =screenHeight;
-    float zombY = screenWidth;
+    float zombX =screenWidth;
+    float zombY = screenHeight;
 
     switch(side)
     {

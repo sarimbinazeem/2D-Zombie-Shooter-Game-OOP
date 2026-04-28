@@ -14,7 +14,7 @@ FileManager::FileManager()
 
 void FileManager::loadData()
 {
-    ifstream inFile("game.txt");
+    ifstream inFile("save.txt");
 
     if(inFile.is_open())
     {

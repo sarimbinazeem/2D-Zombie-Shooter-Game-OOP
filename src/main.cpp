@@ -250,7 +250,7 @@ int main()
             {
                 double currentTime = GetTime();
 
-                if(currentTime - lastShotTime >= player.getWeapon()->getRate())
+                if(player.getWeapon() != nullptr && (currentTime - lastShotTime) >= player.getWeapon()->getRate())
                 {
                     Vector2 mouse = GetMousePosition();
 
@@ -300,7 +300,7 @@ int main()
 
                 if(IsKeyPressed(KEY_T))
                 {
-                    shop.upgradeHealth(player);
+                    shop.upgradeSpeed(player);
                 }
             }
 

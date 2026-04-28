@@ -1,4 +1,4 @@
-#include "Machinegun.h"
+#include "MachineGun.h"
 using namespace std;
 
 void MachineGun::shoot(vector<Bullet>& bullet, double x, double y, float directionX, float directionY)
