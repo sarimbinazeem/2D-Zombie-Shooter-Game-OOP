@@ -8,57 +8,66 @@ HUD::HUD()
 
 void HUD::draw(Player& player, WaveManager& waves)
 {
-    //HP Bar
-    //HP text
+    // Main HUD Bar at top
+    DrawRectangle(10,10,780,90,Fade(LIGHTGRAY,0.85));
+    DrawRectangleLines(10,10,780,90,BLACK);
+
+
+    // HEALTH 
+
+    // Label
     DrawText(TextFormat("Health: %d",player.getHealth()),20,20,20,BLACK);
 
+    // Health bar background
+    DrawRectangle(20,45,200,20,GRAY);
 
-    //Draw rectangle take x,y,width,height,color 
-    //Background of bar
-    DrawRectangle(20,20,200,20,GRAY);
 
-    //Changing of color of health bar accordinng to health
-    Color healthColor;  //color class object health color
+    // Dynamic HP color
+    Color healthColor;
+
     if(player.getHealth()>50)
     {
-          healthColor=GREEN;
+        healthColor=GREEN;
     }
-
     else if(player.getHealth()>20)
     {
-         healthColor=YELLOW;
+        healthColor=YELLOW;
     }
-
     else
     {
-         healthColor=RED;
+        healthColor=RED;
     }
 
-    //Preventation of bug that helps to limit the bar to a certain level (100% health = 200 pixels of bar)
-    int barWidth=player.getHealth()*2;
+
+    // Health bar width
+    int barWidth = player.getHealth()*2;
 
     if(barWidth>200)
     {
         barWidth=200;
     }
 
-    //Color filled bar that changes size based on health so that when health = 50 it fills 100 pixels of the bar (half bar)
-    DrawRectangle(20,20,barWidth,20,healthColor);
 
-    //Border of bar
-    DrawRectangleLines(20,20,200,20,BLACK);
+    // Filled health bar
+    DrawRectangle(20,45,barWidth,20,healthColor);
 
-    //Left has money and health bar
-    //Right has weapon and wave bar
+    // Border
+    DrawRectangleLines(20,45,200,20,BLACK);
 
-    
-    //Money Bar
-    DrawText(TextFormat("Money: %d", player.getMoney()),20,50,20,BLACK);
 
-    //Wave Counter
-    DrawText(TextFormat("Wave: %d",waves.getWave()),620,20,20,BLACK);
+    //MONEY 
 
-    //Weapon Shower
-    DrawText(TextFormat("Weapon: %s",player.getWeapon()->getName()),550,50,20,BLACK);
+    DrawText(
+    TextFormat("Money: %d",player.getMoney()),20,72,20,DARKGREEN);
+
+
+    // WAVE 
+
+    DrawText(TextFormat("Wave: %d",waves.getWave()),560,20,20,RED);
+
+
+    //  WEAPON
+
+    DrawText(TextFormat("Weapon: %s",player.getWeapon()->getName()),500,50,20,DARKBLUE);
 
 }

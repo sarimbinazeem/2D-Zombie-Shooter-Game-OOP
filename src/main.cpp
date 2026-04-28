@@ -134,17 +134,21 @@ int main()
     
     string currentTime=to_string(hour)+":"+minuteText+ampm; //concatened string for format 5:00pm
 
+    //Background Image
+    Texture2D background= LoadTexture("Assets/background.png");
+
 
     while(!WindowShouldClose())
     {
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        
 
         if(gameState == MENU)
         {
-            DrawText("2D ZOMBIE SHOOTER",95,180,60,DARKGREEN);
+            ClearBackground(DARKGREEN);
+            DrawText("2D ZOMBIE SHOOTER",95,180,60,GREEN);
 
-            DrawText("PRESS ENTER TO START",150,250,40,BLACK);
+            DrawText("PRESS ENTER TO START",150,250,40,WHITE);
 
             if(IsKeyPressed(KEY_ENTER))
             {
@@ -153,6 +157,7 @@ int main()
         }
         else if(gameState == PLAYING)
         {
+            DrawTexture(background,0,0,WHITE);
             //==========Player==========
             //Player Move Logic
             player.move();
@@ -414,6 +419,7 @@ int main()
         
         else if(gameState == GAME_OVER)
         {
+            
             DrawText("GAME OVER",215,180,60,RED);
 
             DrawText(TextFormat("Wave Reached: %d",waveManager.getWave()),265,260,30,BLACK);
@@ -461,7 +467,7 @@ int main()
         delete e;
     }
     
-
+    UnloadTexture(background);
 
 
    
