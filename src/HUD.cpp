@@ -43,7 +43,7 @@ void HUD::draw(Player& player, WaveManager& waves)
     }
 
     //Color filled bar that changes size based on health so that when health = 50 it fills 100 pixels of the bar (half bar)
-    DrawRectangle(20,20,barWidth,20,GREEN);
+    DrawRectangle(20,20,barWidth,20,healthColor);
 
     //Border of bar
     DrawRectangleLines(20,20,200,20,BLACK);

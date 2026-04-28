@@ -22,6 +22,10 @@ class Player
 
         Weapon* weapon;
 
+        Texture2D pistolTexture;
+        Texture2D shotgunTexture;
+        Texture2D machineGunTexture;
+
     public:
         Player();
         
@@ -52,6 +56,8 @@ class Player
 
         bool hasShotgun();
         bool hasMachineGun();
+
+        ~Player();
 
 };
 

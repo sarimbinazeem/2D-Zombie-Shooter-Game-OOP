@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <cstring>
 
 Player::Player()
 {
@@ -12,6 +13,12 @@ Player::Player()
 
     shotgunUnlocked = false;
     machineGunUnlocked = false;
+
+    pistolTexture = LoadTexture("Assets/pistol.png");
+
+    shotgunTexture = LoadTexture("Assets/shotgun.png");
+
+    machineGunTexture = LoadTexture("Assets/machinegun.png");
 }
 
 void Player::move()
@@ -61,7 +68,20 @@ void Player::move()
 
 void Player::draw()
 {
-    DrawRectangle(xPos, yPos, width, height, BLUE);
+        if(strcmp(weapon->getName(),"Pistol")==0)
+        {
+            DrawTexture(pistolTexture,xPos,yPos,WHITE);
+        }
+
+        else if(strcmp(weapon->getName(),"Shotgun")==0)
+        {
+            DrawTexture(shotgunTexture,xPos,yPos,WHITE);
+        }
+
+        else
+        {
+            DrawTexture(machineGunTexture,xPos,yPos,WHITE);
+        }
 }
 
 void Player::takeDamage(double damage)
@@ -167,4 +187,11 @@ bool Player::hasShotgun()
 bool Player::hasMachineGun()
 {
     return machineGunUnlocked;
+}
+
+Player::~Player()
+{
+    UnloadTexture(pistolTexture);
+    UnloadTexture(shotgunTexture);
+    UnloadTexture(machineGunTexture);
 }
