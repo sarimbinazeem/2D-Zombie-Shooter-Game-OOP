@@ -33,7 +33,8 @@ enum GameState
 {
     MENU, //0th index
     PLAYING, //1st index
-    GAME_OVER //2nd index
+    SHOP, //2nd index
+    GAME_OVER
 };
 
 //Default start with MENU
@@ -289,33 +290,15 @@ int main()
             if(IsKeyPressed(KEY_X))
             {
                 shop.toggleShop();
+                
+                if(shop.isOpen())
+                {
+                    gameState =SHOP;
+                }
             }
             
-            //Shope Buying Shortcut
-            if(shop.isOpen())
-            {
-                if(IsKeyPressed(KEY_Q))
-                {
-                    shop.buyShotgun(player);
-
-                }
-
-                if(IsKeyPressed(KEY_E))
-                { 
-                    shop.buyMachineGun(player);
-
-                }
-
-                if(IsKeyPressed(KEY_R))
-                {
-                    shop.upgradeHealth(player);
-                }
-
-                if(IsKeyPressed(KEY_T))
-                {
-                    shop.upgradeSpeed(player);
-                }
-            }
+             
+            
 
             //==========Erasing==========
             //Erasing The Useless Bulllets And Zombies
@@ -429,7 +412,64 @@ int main()
             
         }
             
-        
+        else if(gameState == SHOP)
+        {
+            // Background when the shop is open
+            DrawTexture(background,0,0,WHITE);
+            
+            //Frozen entities
+            // Draw player 
+            player.draw();
+
+            // Draw enemies
+            for(auto &e : enemies)
+            {
+                e->draw();
+            }
+
+            // Draw  bullets
+            for(size_t i=0; i<bullets.size(); i++)
+            {
+                bullets[i].drawBullet();
+            }
+
+            // Draw HUD
+            hud.draw(player,waveManager);
+
+            // Draw shop menu
+            shop.drawShop();
+
+            DrawText("GAME PAUSED",300,20,30,YELLOW);
+
+
+            // The Shope Meny
+            if(IsKeyPressed(KEY_Q))
+            {
+                shop.buyShotgun(player);
+            }
+            
+            if(IsKeyPressed(KEY_E))
+            {
+                shop.buyMachineGun(player);
+            }
+            
+            if(IsKeyPressed(KEY_R))
+            {
+                shop.upgradeHealth(player);
+            }
+            
+            if(IsKeyPressed(KEY_T))
+            {
+                 shop.upgradeSpeed(player);
+            }
+
+            // Press X again to go out of the shop
+            if(IsKeyPressed(KEY_X))
+            {
+                shop.toggleShop();
+                gameState = PLAYING;
+            }
+        }    
         else if(gameState == GAME_OVER)
         {
             ClearBackground(DARKGREEN);
@@ -437,7 +477,7 @@ int main()
 
             DrawText(TextFormat("Wave Reached: %d",waveManager.getWave()),265,260,30,BLACK);
 
-            DrawText("PRESS Z TO RESTART",223,340,30,DARKBLUE);
+            DrawText("PRESS Z TO RESTART",223,340,30,BLACK);
 
 
             if(IsKeyPressed(KEY_Z))
