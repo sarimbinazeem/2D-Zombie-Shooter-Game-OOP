@@ -1,4 +1,4 @@
-#include "Bullet.h"
+#include  "../Header Files/Bullet.h"
 
 Bullet::Bullet(float beginX, float beginY, float dirX, float dirY)
 {

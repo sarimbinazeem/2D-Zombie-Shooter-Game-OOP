@@ -1,4 +1,4 @@
-#include "Pistol.h"
+#include "../Header Files/Pistol.h"
 using namespace std;
 
 void Pistol::shoot(vector<Bullet>& bullet, double x, double y, float directionX, float directionY)

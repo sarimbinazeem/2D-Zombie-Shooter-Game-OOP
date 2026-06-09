@@ -1,4 +1,4 @@
-#include "HUD.h"
+#include "../Header Files/HUD.h"
 #include "raylib.h"
 
 HUD::HUD()

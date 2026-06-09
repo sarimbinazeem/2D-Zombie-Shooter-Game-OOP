@@ -1,7 +1,7 @@
-#include "Shop.h"
+#include "../Header Files/Shop.h"
 
-#include "Shotgun.h"
-#include "MachineGun.h"
+#include "../Header Files/Shotgun.h"
+#include "../Header Files/MachineGun.h"
 
 #include <iostream>
 using namespace std;

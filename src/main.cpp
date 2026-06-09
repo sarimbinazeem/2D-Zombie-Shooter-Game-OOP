@@ -4,27 +4,27 @@
 #include <cmath>
 #include <ctime>
 #include "raylib.h"
-#include "Player.h"
+#include "../Header Files/Player.h"
 
-#include "Enemy.h"
-#include "FastZombie.h"
-#include "TankZombie.h"
-#include "Zombie.h"
+#include "../Header Files/Enemy.h"
+#include "../Header Files/FastZombie.h"
+#include "../Header Files/TankZombie.h"
+#include "../Header Files/Zombie.h"
 
-#include "Bullet.h"
+#include "../Header Files/Bullet.h"
 
-#include "Weapon.h"
-#include "Pistol.h"
-#include "Shotgun.h"
-#include  "MachineGun.h"
+#include "../Header Files/Weapon.h"
+#include "../Header Files/Pistol.h"
+#include "../Header Files/Shotgun.h"
+#include  "../Header Files/MachineGun.h"
 
-#include "WaveManager.h"
+#include "../Header Files/WaveManager.h"
 
-#include "Shop.h"
+#include "../Header Files/Shop.h"
 
-#include "HUD.h"
+#include "../Header Files/HUD.h"
 
-#include "FileManager.h"
+#include "../Header Files/FileManager.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "WaveManager.h"
+#include "../Header Files/WaveManager.h"
 #include <cstdlib>
 
 WaveManager::WaveManager() 

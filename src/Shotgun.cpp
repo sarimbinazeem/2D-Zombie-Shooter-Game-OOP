@@ -1,4 +1,4 @@
-#include "Shotgun.h"
+#include "../Header Files/Shotgun.h"
 using namespace std;
 
 void Shotgun::shoot(vector<Bullet>& bullet, double x, double y, float directionX, float directionY)
