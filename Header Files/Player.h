@@ -22,6 +22,8 @@ class Player
         bool shotgunUnlocked;
         bool machineGunUnlocked;
 
+        float rotation; //in degrees
+
         Weapon* weapon;
 
         Texture2D pistolTexture;

@@ -14,6 +14,8 @@ Player::Player()
     shotgunUnlocked = false;
     machineGunUnlocked = false;
 
+    rotation = 0.0f;
+
     pistolTexture = LoadTexture("Assets/pistol.png");
 
     shotgunTexture = LoadTexture("Assets/shotgun.png");
@@ -29,21 +31,25 @@ void Player::move()
     if (IsKeyDown(KEY_W))
     {
         yPos -= speed;
+        rotation = 270.0f; 
     }
 
     if (IsKeyDown(KEY_S))
     {
         yPos += speed;
+        rotation = 90.0f;
     }
 
     if (IsKeyDown(KEY_A))
     {
         xPos -= speed;
+        rotation = 180.0f;
     }
 
     if (IsKeyDown(KEY_D))
     {
         xPos += speed;
+        rotation = 0.0f;
     }
 
     //To limit it to move from boundaries of the screen
@@ -71,26 +77,32 @@ void Player::move()
 
 void Player::draw()
 {
-        if(weapon == nullptr)
-        {
-            DrawTexture(pistolTexture,xPos,yPos,WHITE);
-            return;
-        }
-        
-        if(strcmp(weapon->getName(),"Pistol")==0)
-        {
-            DrawTexture(pistolTexture,xPos,yPos,WHITE);
-        }
+    Texture2D currentTexture;
 
-        else if(strcmp(weapon->getName(),"Shotgun")==0)
-        {
-            DrawTexture(shotgunTexture,xPos,yPos,WHITE);
-        }
+    if (weapon == nullptr)
+    {
+        currentTexture = pistolTexture;
+    }
+    else if (strcmp(weapon->getName(), "Pistol") == 0)
+    {
+        currentTexture = pistolTexture;
+    }
+    else if (strcmp(weapon->getName(), "Shotgun") == 0) 
+    {
+        currentTexture = shotgunTexture;
+    }
+    else
+    {
+        currentTexture = machineGunTexture;
+    }
 
-        else
-        {
-            DrawTexture(machineGunTexture,xPos,yPos,WHITE);
-        }
+    Rectangle source = {0, 0,(float)currentTexture.width, (float)currentTexture.height};
+
+    Rectangle destination = { xPos + width / 2.0f,yPos + height / 2.0f, (float)width,(float)height};
+
+    Vector2 origin = { width / 2.0f, height / 2.0f};
+
+    DrawTexturePro( currentTexture, source,  destination, origin, rotation,  WHITE);
 }
 
 void Player::takeDamage(double damage)
