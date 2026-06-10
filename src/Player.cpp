@@ -1,4 +1,5 @@
 #include "../Header Files/Player.h"
+#include <cmath>
 #include <cstring>
 
 Player::Player()
@@ -7,8 +8,8 @@ Player::Player()
     yPos = 300;
     speed = 5;
     health = 100;
-    width = 40;
-    height = 40;
+    width = 80;
+    height = 80;
     money = 0;
 
     shotgunUnlocked = false;
@@ -28,66 +29,76 @@ Player::Player()
 
 void Player::move()
 {
+    // WASD Movement
     if (IsKeyDown(KEY_W))
     {
         yPos -= speed;
-        targetRotation = 270.0f; 
     }
 
     if (IsKeyDown(KEY_S))
     {
         yPos += speed;
-        targetRotation = 90.0f;
     }
 
     if (IsKeyDown(KEY_A))
     {
         xPos -= speed;
-        targetRotation = 180.0f;
     }
 
     if (IsKeyDown(KEY_D))
     {
         xPos += speed;
-        targetRotation = 0.0f;
     }
 
-    //To limit it to move from boundaries of the screen
+    // Screen Boundaries
     if (xPos < 0)
     {
         xPos = 0;
-
     }
+
     if (yPos < 0)
     {
         yPos = 0;
-
     }
+
     if (xPos + width > 800)
     {
         xPos = 800 - width;
-
     }
+
     if (yPos + height > 600)
     {
         yPos = 600 - height;
-
     }
 
-    //Angle interpolation to find out the shortest path for rotation (CLOCK WISE OR ANTI CLOCK WISE)
+    // Rotate Towards Mouse
+    Vector2 mousePos = GetMousePosition();
+
+    float centerX = xPos + width / 2.0f; //Player's center X coordinate
+    float centerY = yPos + height / 2.0f; //Player's center Y coordinate
+
+    float dx = mousePos.x - centerX;
+    float dy = mousePos.y - centerY;
+
+    targetRotation = atan2(dy, dx) * RAD2DEG + 70; //atan2 gives angle in radians, convert to degrees
+
+    // Smooth Rotation
     float diff = targetRotation - rotation;
 
-    while (diff > 180){
-         diff -= 360;
+    // Ensure the shortest rotation direction
+    while (diff > 180)
+    {
+        diff -= 360;
     }
 
-    while (diff < -180) 
+    while (diff < -180)
     {
         diff += 360;
     }
 
-    rotation += diff * 0.15f;
+    rotation += diff * 0.15f; //move by 15% of the difference each frame for smoothness
 }
+
 
 void Player::draw()
 {
