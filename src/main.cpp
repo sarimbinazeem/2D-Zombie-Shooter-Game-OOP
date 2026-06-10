@@ -43,9 +43,10 @@ GameState gameState = MENU;
 
 int main()
 {
-    const int screenWidth = 800;
-    const int screenHeight = 600;
-    
+     int screenWidth = 1200;
+     int screenHeight = 800;
+
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE); //To make the window resizable
     InitWindow(screenWidth,screenHeight,"2D-Zombie Shooter Game");
     SetTargetFPS(60);
     InitAudioDevice();
@@ -155,31 +156,39 @@ int main()
     {
         UpdateMusicStream(bgMusic);
         BeginDrawing();
+
+        screenWidth = GetScreenWidth();
+        screenHeight = GetScreenHeight();
+
+        if (IsKeyPressed(KEY_F11))
+        {
+            ToggleFullscreen();
+        }
         
 
-    if(gameState == MENU)
-    {
-        DrawTexture(homepage,0,0,WHITE);
-
-        DrawRectangle(0,0,800,600,Fade(BLACK,0.35f));
-
-        DrawText("2D ZOMBIE SHOOTER",110,120,60,RED);
-
-        DrawText("PRESS ENTER TO START",180,250,35,WHITE);
-
-        DrawText("PRESS ESC TO EXIT",220,310,25,LIGHTGRAY);
-
-        DrawText("Created By Sarim",290,550,20,YELLOW);
-
-        if(IsKeyPressed(KEY_ENTER))
+        if(gameState == MENU)
         {
-            StopMusicStream(bgMusic);
-            gameState = PLAYING;
+             DrawTexturePro(homepage, Rectangle{0, 0, (float)homepage.width, (float)homepage.height},Rectangle{0, 0, (float)screenWidth, (float)screenHeight},Vector2{0, 0},0.0f,WHITE);
+
+            DrawRectangle(0,0,screenWidth,screenHeight,Fade(BLACK,0.35f));
+
+            DrawText("2D ZOMBIE SHOOTER",110,120,60,RED);
+
+            DrawText("PRESS ENTER TO START",180,250,35,WHITE);
+
+            DrawText("PRESS ESC TO EXIT",220,310,25,LIGHTGRAY);
+
+            DrawText("Created By Sarim",290,550,20,YELLOW);
+
+            if(IsKeyPressed(KEY_ENTER))
+            {
+                StopMusicStream(bgMusic);
+                gameState = PLAYING;
+            }
         }
-    }
         else if(gameState == PLAYING)
         {
-            DrawTexture(background,0,0,WHITE);
+            DrawTexturePro(background, Rectangle{0, 0, (float)background.width, (float)background.height},Rectangle{0, 0, (float)screenWidth, (float)screenHeight},Vector2{0, 0},0.0f,WHITE);
             //==========Player==========
             //Player Move Logic
             player.move();
@@ -318,7 +327,7 @@ int main()
                 Vector2 bulletPos = bullets[i].getPosition();
 
                 //Removing the ofscreen bullets (so that it doesnt exist forever)
-                if(bullets[i].getPosition().x >800 || bullets[i].getPosition().x <0 || bullets[i].getPosition().y > 600 || bullets[i].getPosition().y < 0)
+                if(bullets[i].getPosition().x > screenWidth  || bullets[i].getPosition().x <0 || bullets[i].getPosition().y > screenHeight || bullets[i].getPosition().y < 0)
                 {
                     bullets.erase(bullets.begin() + i);
                     i--; //Skipped so that the next bullet of the one that is removed is not skipped (Due To Vector Removing in between)
@@ -424,7 +433,7 @@ int main()
         else if(gameState == SHOP)
         {
             // Background when the shop is open
-            DrawTexture(background,0,0,WHITE);
+            DrawTexturePro(background,Rectangle{0, 0, (float)background.width, (float)background.height},Rectangle{0, 0, (float)screenWidth, (float)screenHeight}, Vector2{0, 0}, 0.0f, WHITE);
             
             //Frozen entities
             // Draw player 
@@ -482,12 +491,11 @@ int main()
         else if(gameState == GAME_OVER)
         {
             ClearBackground(DARKGREEN);
-            DrawText("GAME OVER",215,180,60,RED);
+            DrawText("GAME OVER",  screenWidth/2 - MeasureText("GAME OVER", 60)/2,  screenHeight/3, 60, RED);
 
+            DrawText("PRESS Z TO RESTART",screenWidth/2 - MeasureText("PRESS Z TO RESTART", 30)/2, screenHeight/2,30,BLACK);
             DrawText(TextFormat("Wave Reached: %d",waveManager.getWave()),265,260,30,BLACK);
-
-            DrawText("PRESS Z TO RESTART",223,340,30,BLACK);
-
+            
 
             if(IsKeyPressed(KEY_Z))
             {

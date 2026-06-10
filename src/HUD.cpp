@@ -9,9 +9,10 @@ HUD::HUD()
 void HUD::draw(Player& player, WaveManager& waves)
 {
     // Main HUD Bar at top
-    DrawRectangle(10,10,780,90,Fade(LIGHTGRAY,0.85));
-    DrawRectangleLines(10,10,780,90,BLACK);
+    int hudWidth = GetScreenWidth() - 20;
 
+    DrawRectangle(10,10,hudWidth,90,Fade(LIGHTGRAY,0.85f));
+    DrawRectangleLines(10,10,hudWidth,90,BLACK);
 
     // HEALTH 
 
@@ -63,11 +64,16 @@ void HUD::draw(Player& player, WaveManager& waves)
 
     // WAVE 
 
-    DrawText(TextFormat("Wave: %d",waves.getWave()),560,20,20,RED);
+    DrawText(TextFormat("Wave: %d",waves.getWave()), GetScreenWidth() - 220,20,20,RED);
 
 
     //  WEAPON
+    const char* weaponName = "None";
 
-    DrawText(TextFormat("Weapon: %s",player.getWeapon()->getName()),500,50,20,DARKBLUE);
+    if(player.getWeapon() != nullptr)
+    {
+        weaponName = player.getWeapon()->getName();
+         DrawText(TextFormat("Weapon: %s",weaponName),GetScreenWidth() - 280,50,20,DARKBLUE);
+    }
 
 }

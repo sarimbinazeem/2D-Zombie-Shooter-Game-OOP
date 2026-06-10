@@ -8,8 +8,8 @@ Player::Player()
     yPos = 300;
     speed = 5;
     health = 100;
-    width = 50;
-    height = 50;
+    width = 70;
+    height = 70;
     money = 0;
 
     shotgunUnlocked = false;
@@ -61,14 +61,14 @@ void Player::move()
         yPos = 0;
     }
 
-    if (xPos + width > 800)
+    if (xPos + width > GetScreenWidth())
     {
-        xPos = 800 - width;
+        xPos = GetScreenWidth() - width;
     }
 
-    if (yPos + height > 600)
+    if (yPos + height > GetScreenHeight())
     {
-        yPos = 600 - height;
+        yPos = GetScreenHeight() - height;
     }
 
     // Rotate Towards Mouse
@@ -253,8 +253,8 @@ Player& Player::operator+=(int reward)
 
 void Player::reset()
 {
-    xPos = 400;
-    yPos = 300;
+    xPos = GetScreenWidth()/2 - width/2;
+    yPos = GetScreenHeight()/2 - height/2;
     speed = 5;
     health = 100;
     money = 0;

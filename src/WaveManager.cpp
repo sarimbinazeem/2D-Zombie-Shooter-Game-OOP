@@ -14,13 +14,13 @@ void WaveManager::startWave()
     //Increasing zombies number per wave number
     zombiesRemaining = wave * 3;
   
-    
+    spawnTimer = 0.0f;  
 }
 
 void WaveManager::checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
 {
     //If Zombies Are All Dead Start New Wave
-    if(enemies.empty() &&zombiesRemaining==0)
+    if(enemies.empty() && zombiesRemaining<=0)
     {
         //Move to Next Wave
         wave++;
@@ -61,27 +61,29 @@ void WaveManager::spawnGradually( vector<Enemy*>& enemies,int screenWidth,int sc
 
     float zombX =screenWidth;
     float zombY = screenHeight;
+    float margin = 50; // safe spawn distance outside screen
 
+    //Randomly decide the side of the screen to spawn the zombie
     switch(side)
     {
         case 0: // top
-            zombX = screenWidth/2;
-            zombY = 0; //Spawning outside frame so it can spawn at extreme edges
+            zombX = rand() % screenWidth; 
+            zombY = -margin; // negative to spawn above the screen
             break;
 
         case 1: // bottom
-            zombX = screenWidth/2;
-            zombY = screenHeight;
+            zombX = rand() % screenWidth;
+            zombY = screenHeight + margin; 
             break;
 
         case 2: // left
-            zombX = 0;
-            zombY = screenHeight/2;
+            zombX = -margin;
+            zombY = rand() % screenHeight;
             break;
 
         case 3: // right
-            zombX = screenWidth;
-            zombY = screenHeight/2;
+            zombX = screenWidth + margin;
+            zombY = rand() % screenHeight;
             break;
     }
 
