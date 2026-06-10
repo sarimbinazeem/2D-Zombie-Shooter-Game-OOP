@@ -45,10 +45,11 @@ int main()
 {
     const int screenWidth = 800;
     const int screenHeight = 600;
-
+    
     InitWindow(screenWidth,screenHeight,"2D-Zombie Shooter Game");
     SetTargetFPS(60);
     InitAudioDevice();
+    
 
     //Player Creation
     Player player;
@@ -138,6 +139,8 @@ int main()
 
     //Background Image
     Texture2D background= LoadTexture("Assets/background.png");
+     Texture2D homepage= LoadTexture("Assets/homepage.png");
+     cout<< homepage.id <<endl; //to check if the image is loaded properly or not (if id is 0 then it is not loaded properly)
 
     //Audio
     Music bgMusic = LoadMusicStream("Assets/music.mp3");
@@ -154,20 +157,26 @@ int main()
         BeginDrawing();
         
 
-        if(gameState == MENU)
+    if(gameState == MENU)
+    {
+        DrawTexture(homepage,0,0,WHITE);
+
+        DrawRectangle(0,0,800,600,Fade(BLACK,0.35f));
+
+        DrawText("2D ZOMBIE SHOOTER",110,120,60,RED);
+
+        DrawText("PRESS ENTER TO START",180,250,35,WHITE);
+
+        DrawText("PRESS ESC TO EXIT",220,310,25,LIGHTGRAY);
+
+        DrawText("Created By Sarim",290,550,20,YELLOW);
+
+        if(IsKeyPressed(KEY_ENTER))
         {
-            ClearBackground(DARKGREEN);
-            DrawText("2D ZOMBIE SHOOTER",95,180,60,GREEN);
-
-            DrawText("PRESS ENTER TO START",150,250,40,WHITE);
-
-            if(IsKeyPressed(KEY_ENTER))
-            {
-                StopMusicStream(bgMusic);
-                gameState = PLAYING;
-
-            }
+            StopMusicStream(bgMusic);
+            gameState = PLAYING;
         }
+    }
         else if(gameState == PLAYING)
         {
             DrawTexture(background,0,0,WHITE);
@@ -521,7 +530,8 @@ int main()
     }
     
     UnloadTexture(background);
-
+    UnloadTexture(homepage);
+    UnloadMusicStream(bgMusic);
 
    
     UnloadSound(zombieHitSound);
