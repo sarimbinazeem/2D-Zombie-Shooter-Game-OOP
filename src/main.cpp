@@ -141,7 +141,8 @@ int main()
     //Background Image
     Texture2D background= LoadTexture("Assets/background.png");
      Texture2D homepage= LoadTexture("Assets/homepage.png");
-     cout<< homepage.id <<endl; //to check if the image is loaded properly or not (if id is 0 then it is not loaded properly)
+
+    Font zombieFont = LoadFont("Assets/Zombie.otf");
 
     //Audio
     Music bgMusic = LoadMusicStream("Assets/music.mp3");
@@ -172,13 +173,29 @@ int main()
 
             DrawRectangle(0,0,screenWidth,screenHeight,Fade(BLACK,0.35f));
 
-            DrawText("2D ZOMBIE SHOOTER",110,120,60,RED);
+            const char* title = "NUCES OUTBREAK";
 
-            DrawText("PRESS ENTER TO START",180,250,35,WHITE);
+            Vector2 size =  MeasureTextEx(zombieFont, title, 100, 2);
+            
+            float x = (GetScreenWidth() - size.x) / 2;
+            float y = 30;
 
-            DrawText("PRESS ESC TO EXIT",220,310,25,LIGHTGRAY);
+            DrawTextEx(zombieFont, title, Vector2{x+3, y+3}, 100, 2, MAROON);
 
-            DrawText("Created By Sarim",290,550,20,YELLOW);
+            DrawTextEx(zombieFont, title, Vector2{x, y}, 100, 2, RED);
+
+            const char* startText = "PRESS ENTER TO START";
+
+            Vector2 startSize = MeasureTextEx(zombieFont, startText, 50, 2);
+
+            float startX = (GetScreenWidth() - startSize.x) / 2;
+            float startY = GetScreenHeight() - 120;
+
+            // blinking effect
+            float alpha = (sin(GetTime() * 5) + 1) / 2;
+
+            DrawTextEx(zombieFont,startText, Vector2{startX, startY},  50, 2, Fade(WHITE, alpha));
+   
 
             if(IsKeyPressed(KEY_ENTER))
             {
