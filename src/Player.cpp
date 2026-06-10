@@ -31,25 +31,25 @@ void Player::move()
     if (IsKeyDown(KEY_W))
     {
         yPos -= speed;
-        rotation = 270.0f; 
+        targetRotation = 270.0f; 
     }
 
     if (IsKeyDown(KEY_S))
     {
         yPos += speed;
-        rotation = 90.0f;
+        targetRotation = 90.0f;
     }
 
     if (IsKeyDown(KEY_A))
     {
         xPos -= speed;
-        rotation = 180.0f;
+        targetRotation = 180.0f;
     }
 
     if (IsKeyDown(KEY_D))
     {
         xPos += speed;
-        rotation = 0.0f;
+        targetRotation = 0.0f;
     }
 
     //To limit it to move from boundaries of the screen
@@ -73,10 +73,25 @@ void Player::move()
         yPos = 600 - height;
 
     }
+
+    //Angle interpolation to find out the shortest path for rotation (CLOCK WISE OR ANTI CLOCK WISE)
+    float diff = targetRotation - rotation;
+
+    while (diff > 180){
+         diff -= 360;
+    }
+
+    while (diff < -180) 
+    {
+        diff += 360;
+    }
+
+    rotation += diff * 0.15f;
 }
 
 void Player::draw()
 {
+    //Getting the texture based on the current weapon
     Texture2D currentTexture;
 
     if (weapon == nullptr)
@@ -96,6 +111,7 @@ void Player::draw()
         currentTexture = machineGunTexture;
     }
 
+    //For rotation and drawing the player texture
     Rectangle source = {0, 0,(float)currentTexture.width, (float)currentTexture.height};
 
     Rectangle destination = { xPos + width / 2.0f,yPos + height / 2.0f, (float)width,(float)height};

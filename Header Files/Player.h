@@ -23,6 +23,7 @@ class Player
         bool machineGunUnlocked;
 
         float rotation; //in degrees
+        float targetRotation; //for smoothness
 
         Weapon* weapon;
 
