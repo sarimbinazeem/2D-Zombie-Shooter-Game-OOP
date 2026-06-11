@@ -143,6 +143,7 @@ int main()
      Texture2D homepage= LoadTexture("Assets/homepage.png");
 
     Font zombieFont = LoadFont("Assets/Zombie.otf");
+    Font instructionsFont = LoadFont("Assets/Instructions.ttf");
 
     //Audio
     Music bgMusic = LoadMusicStream("Assets/music.mp3");
@@ -152,6 +153,11 @@ int main()
     Sound gameOverSound = LoadSound("Assets/gameover.wav");
 
     PlayMusicStream(bgMusic);
+
+    //Instruction Variables
+    bool showInstructions = false;
+    float instructionWidth = 40.0f;
+    Rectangle instructionButton = {0, 150, instructionWidth, 300};
 
     while(!WindowShouldClose())
     {
@@ -195,7 +201,48 @@ int main()
             float alpha = (sin(GetTime() * 5) + 1) / 2;
 
             DrawTextEx(zombieFont,startText, Vector2{startX, startY},  50, 2, Fade(WHITE, alpha));
-   
+            
+            // Instructions Button
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), instructionButton))
+            {
+                showInstructions = !showInstructions;
+            }
+
+            if(showInstructions && instructionWidth <350)
+            {
+                instructionWidth += 10; // Increase width to reveal instructions
+            }
+            else if(!showInstructions && instructionWidth > 40)
+            {
+                instructionWidth -= 10; // Decrease width to hide instructions
+            }
+
+            DrawRectangle(0, 100, (int)instructionWidth, 300, GRAY);
+            
+                DrawTextEx(instructionsFont, "I", {12, 110}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "N", {12, 135}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "S", {12, 160}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "T", {12, 185}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "R", {12, 210}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "U", {12, 235}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "C", {12, 260}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "T", {12, 285}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "I", {12, 310}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "O", {12, 335}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "N", {12, 360}, 20, 1, MAROON);
+                DrawTextEx(instructionsFont, "S", {12, 385}, 20, 1, MAROON);
+
+                if(instructionWidth > 300)
+                {
+                    DrawTextEx(instructionsFont, "CONTROLS", {60, 120}, 30, 1, MAROON);
+
+                    DrawTextEx(instructionsFont, "LEFT MB - Shoot", {60, 170}, 25, 1, WHITE);
+                    DrawTextEx(instructionsFont, "X - Open Shop", {60, 210}, 25, 1, WHITE);
+                    DrawTextEx(instructionsFont, "TAB - Open Last Records", {60, 250}, 25, 1, WHITE);
+                    DrawTextEx(instructionsFont, "1 - Pistol", {60, 290}, 25, 1, WHITE);
+                    DrawTextEx(instructionsFont, "2 - Shotgun", {60, 320}, 25, 1, WHITE);
+                    DrawTextEx(instructionsFont, "3 - Machine Gun", {60, 350}, 25, 1, WHITE);
+                }
 
             if(IsKeyPressed(KEY_ENTER))
             {
@@ -554,6 +601,8 @@ int main()
         delete e;
     }
     
+    UnloadFont(zombieFont);
+
     UnloadTexture(background);
     UnloadTexture(homepage);
     UnloadMusicStream(bgMusic);
