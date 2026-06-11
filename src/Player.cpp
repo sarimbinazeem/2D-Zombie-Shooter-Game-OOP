@@ -8,8 +8,8 @@ Player::Player()
     yPos = 300;
     speed = 5;
     health = 100;
-    width = 70;
-    height = 70;
+    width = 76;
+    height = 76;
     money = 0;
 
     shotgunUnlocked = false;
