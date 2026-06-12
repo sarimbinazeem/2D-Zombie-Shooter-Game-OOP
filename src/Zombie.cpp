@@ -2,30 +2,36 @@
 #include <cmath>
 #include "../Header Files/Zombie.h"
 
+Texture2D Zombie::texture;
+
 Zombie::Zombie(float posX,float posY)
 {
     x = posX;
     y = posY;
     speed = 1;
     health = 100;
-    radius = 20;
+    radius = 70;
     damage = 5;
 }
 
 
-
+void Zombie::setTexture(Texture2D tex)
+{
+    texture = tex;
+}
 
 //Function overriding
 
 void Zombie::draw()
 {
-    DrawCircle((int)x,(int)y,radius,GREEN);
+    DrawTexturePro(texture, Rectangle{0,0,(float)texture.width,(float)texture.height},Rectangle{x,y,(float)radius*2,(float)radius*2},  Vector2{(float)radius,(float)radius},  rotation,  WHITE);
 }
 void Zombie::update(float playerX, float playerY)
 {
     float dx = playerX - x;
     float dy = playerY - y;
 
+    rotation = atan2(dy, dx) * 180 / PI  - 70; // Calculate rotation angle in degrees
     float length = sqrt(pow(dx,2)+ pow(dy,2)); //The distance between Zombie and Player
 
     //To Make the Zombie Run Smoothly We Normalize The Vector

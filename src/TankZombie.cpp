@@ -2,6 +2,13 @@
 #include <cmath>
 using namespace std;
 
+Texture2D TankZombie::texture;
+
+void TankZombie::setTexture(Texture2D tex)
+{
+    texture = tex;
+}
+
 TankZombie::TankZombie(float posX, float posY)
 {
     x  = posX;
@@ -9,7 +16,7 @@ TankZombie::TankZombie(float posX, float posY)
     health = 200;
     speed = 0.75f;
     damage = 10;
-    radius = 30;
+    radius = 100;
 }
 
 void TankZombie::update(float playerX, float playerY)
@@ -24,11 +31,12 @@ void TankZombie::update(float playerX, float playerY)
         x += (dx / distance) * speed;
         y += (dy / distance) * speed;
     }
+    rotation = atan2(dy, dx) * 180 / PI - 70; // Calculate rotation angle in degrees
 }
 
 void TankZombie::draw()
 {
-    DrawCircle(x, y, radius, RED);
+    DrawTexturePro(texture, Rectangle{0,0,(float)texture.width,(float)texture.height},Rectangle{x,y,(float)radius*2,(float)radius*2},  Vector2{(float)radius,(float)radius},  rotation,  WHITE);
 }
 
 int TankZombie::getReward()

@@ -17,7 +17,10 @@ class Player
         float yPos;
         int width;
         int height;
-        int money;  
+        int money; 
+        
+        double baseWidth;
+        double baseHeight;
 
         bool shotgunUnlocked;
         bool machineGunUnlocked;
@@ -61,6 +64,8 @@ class Player
 
         bool hasShotgun();
         bool hasMachineGun();
+
+        // void updateScale();
 
         friend class Shop; 
 

@@ -9,6 +9,7 @@ Enemy::  Enemy(float startX, float startY)
     radius = 15.0f;
     damage = 5;
     health =100;
+    rotation = 0.0f;
 }
 
 Enemy:: ~Enemy() { }

@@ -13,6 +13,7 @@ class Enemy
         float  x;
         float  y;
         float  speed;
+        float rotation;
         
         int damage;
         int radius;

@@ -9,6 +9,9 @@ using namespace std;
 
 class FastZombie : public Enemy
 {
+    private:
+         static Texture2D texture;
+
     public:
         //Constructors
         FastZombie();
@@ -19,6 +22,7 @@ class FastZombie : public Enemy
         void draw() override; 
         int getReward() override;      
 
+        static void setTexture(Texture2D tex); // Static function to load the texture for all Zombie instances
 };
 
 #endif

@@ -142,6 +142,19 @@ int main()
     Texture2D background= LoadTexture("Assets/background.png");
      Texture2D homepage= LoadTexture("Assets/homepage.png");
 
+    Texture2D zombie = LoadTexture("Assets/zombie.png");
+
+    Texture2D fastZombie = LoadTexture("Assets/fastZombie.png");
+
+    Texture2D tankZombie= LoadTexture("Assets/tankZombie.png");
+
+    Zombie::setTexture(zombie);
+
+    FastZombie::setTexture(fastZombie);
+
+    TankZombie::setTexture(tankZombie);
+
+
     Font zombieFont = LoadFont("Assets/Zombie.otf");
     Font instructionsFont = LoadFont("Assets/Instructions.ttf");
 
@@ -170,6 +183,7 @@ int main()
         if (IsKeyPressed(KEY_F11))
         {
             ToggleFullscreen();
+            // player.updateScale(); // Update player scale when toggling fullscreen
         }
         
 
@@ -602,10 +616,14 @@ int main()
     }
     
     UnloadFont(zombieFont);
+    UnloadFont(instructionsFont);
 
     UnloadTexture(background);
     UnloadTexture(homepage);
     UnloadMusicStream(bgMusic);
+    UnloadTexture(zombie);
+    UnloadTexture(fastZombie);
+    UnloadTexture(tankZombie);
 
    
     UnloadSound(zombieHitSound);

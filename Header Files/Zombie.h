@@ -5,6 +5,8 @@
 
 class Zombie : public Enemy
 {
+    private:
+        static Texture2D texture;
 
     public:
          //Zombie Constructor
@@ -19,6 +21,8 @@ class Zombie : public Enemy
         int getDamage();
         int getRadius();
         Vector2 getPosition();
+
+        static void setTexture(Texture2D tex); // Static function to load the texture for all Zombie instances
 
 };
 

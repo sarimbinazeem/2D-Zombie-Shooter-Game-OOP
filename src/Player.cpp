@@ -8,9 +8,12 @@ Player::Player()
     yPos = 300;
     speed = 5;
     health = 100;
-    width = 76;
-    height = 76;
+    baseWidth = 76;
+    baseHeight = 76;
     money = 0;
+    width = baseWidth;
+    height = baseHeight;
+
 
     shotgunUnlocked = false;
     machineGunUnlocked = false;
@@ -264,3 +267,11 @@ void Player::reset()
 
     weapon = nullptr;
 }
+
+// void Player::updateScale()
+// {
+//     float scale = min( (float)GetScreenWidth() / 1200.0f, (float)GetScreenHeight() / 800.0f);
+
+//     width = baseWidth * scale;
+//     height = baseHeight * scale;
+// }
