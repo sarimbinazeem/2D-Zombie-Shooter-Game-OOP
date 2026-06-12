@@ -8,11 +8,9 @@ Player::Player()
     yPos = 300;
     speed = 5;
     health = 100;
-    baseWidth = 76;
-    baseHeight = 76;
     money = 0;
-    width = baseWidth;
-    height = baseHeight;
+    width = 70;
+    height = 70;
 
 
     shotgunUnlocked = false;
@@ -64,14 +62,14 @@ void Player::move()
         yPos = 0;
     }
 
-    if (xPos + width > GetScreenWidth())
+    if (xPos + width > WORLD_WIDTH)
     {
-        xPos = GetScreenWidth() - width;
+        xPos = WORLD_WIDTH - width;
     }
 
-    if (yPos + height > GetScreenHeight())
+    if (yPos + height > WORLD_HEIGHT)
     {
-        yPos = GetScreenHeight() - height;
+        yPos = WORLD_HEIGHT - height;
     }
 
     // Rotate Towards Mouse
@@ -256,8 +254,8 @@ Player& Player::operator+=(int reward)
 
 void Player::reset()
 {
-    xPos = GetScreenWidth()/2 - width/2;
-    yPos = GetScreenHeight()/2 - height/2;
+    xPos = WORLD_WIDTH/2 - width/2;
+    yPos = WORLD_HEIGHT/2 - height/2;
     speed = 5;
     health = 100;
     money = 0;
@@ -265,7 +263,7 @@ void Player::reset()
     shotgunUnlocked = false;
     machineGunUnlocked = false;
 
-    weapon = nullptr;
+   weapon = nullptr;
 }
 
 // void Player::updateScale()

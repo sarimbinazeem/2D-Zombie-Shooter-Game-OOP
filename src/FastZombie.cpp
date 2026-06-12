@@ -30,7 +30,7 @@ void FastZombie::update(float playerX, float playerY)
     float dx = playerX - x;
     float dy = playerY - y;
 
-    rotation = atan2(dy, dx) * 180 / PI  - 70;  // Calculate rotation angle in degrees
+    rotation = atan2(dy, dx) * 180 / PI  - 80;  // Calculate rotation angle in degrees
 
     float length = sqrt(pow(dx,2)+ pow(dy,2)); //The distance between Zombie and Player
 

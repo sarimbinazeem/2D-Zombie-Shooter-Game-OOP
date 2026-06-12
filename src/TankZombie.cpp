@@ -31,7 +31,7 @@ void TankZombie::update(float playerX, float playerY)
         x += (dx / distance) * speed;
         y += (dy / distance) * speed;
     }
-    rotation = atan2(dy, dx) * 180 / PI - 70; // Calculate rotation angle in degrees
+    rotation = atan2(dy, dx) * 180 / PI - 80; // Calculate rotation angle in degrees
 }
 
 void TankZombie::draw()

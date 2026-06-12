@@ -8,6 +8,11 @@
 
 using namespace std;
 
+
+const int WORLD_WIDTH = 1200;
+const int WORLD_HEIGHT = 800;
+
+
 class Player
 {
     private:
@@ -18,9 +23,6 @@ class Player
         int width;
         int height;
         int money; 
-        
-        double baseWidth;
-        double baseHeight;
 
         bool shotgunUnlocked;
         bool machineGunUnlocked;

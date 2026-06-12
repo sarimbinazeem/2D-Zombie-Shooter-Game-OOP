@@ -40,6 +40,27 @@ enum GameState
 //Default start with MENU
 GameState gameState = MENU;
 
+void DrawBackground(Texture2D texture)
+{
+    float screenW = (float)GetScreenWidth();
+    float screenH = (float)GetScreenHeight();
+
+    // Calculate scale to fit the screen
+    float scaleX = screenW / texture.width;
+    float scaleY = screenH / texture.height;
+
+    // Use MAX to COVER the screen
+    float scale = (scaleX > scaleY) ? scaleX : scaleY;
+
+    // Calculate the position to center the texture
+    float drawW = texture.width * scale;
+    float drawH = texture.height * scale;
+    // Center the texture on the screen
+    float x = (screenW - drawW) / 2.0f;
+    float y = (screenH - drawH) / 2.0f;
+    // Draw the texture with scaling
+    DrawTextureEx(texture, {x, y}, 0.0f, scale, WHITE);
+}
 
 int main()
 {
@@ -189,8 +210,8 @@ int main()
 
         if(gameState == MENU)
         {
-             DrawTexturePro(homepage, Rectangle{0, 0, (float)homepage.width, (float)homepage.height},Rectangle{0, 0, (float)screenWidth, (float)screenHeight},Vector2{0, 0},0.0f,WHITE);
-
+            //  DrawTexturePro(homepage, Rectangle{0, 0, (float)homepage.width, (float)homepage.height},Rectangle{0, 0, (float)screenWidth, (float)screenHeight},Vector2{0, 0},0.0f,WHITE);
+            DrawBackground(homepage);
             DrawRectangle(0,0,screenWidth,screenHeight,Fade(BLACK,0.35f));
 
             const char* title = "NUCES OUTBREAK";
@@ -266,13 +287,14 @@ int main()
         }
         else if(gameState == PLAYING)
         {
-            DrawTexturePro(background, Rectangle{0, 0, (float)background.width, (float)background.height},Rectangle{0, 0, (float)screenWidth, (float)screenHeight},Vector2{0, 0},0.0f,WHITE);
+           DrawBackground(background);
+            //    DrawTexturePro(background, Rectangle{0, 0, (float)background.width, (float)background.height},Rectangle{0, 0, (float)screenWidth, (float)screenHeight},Vector2{0, 0},0.0f,WHITE);
             //==========Player==========
             //Player Move Logic
             player.move();
-
+            
             //==========Enemy==========
-        
+            
             //Enemy Move Towards Player Logic
             //&e is used because we want to make change in the variables of e object
             for(auto &e : enemies)
@@ -280,55 +302,55 @@ int main()
                 //Arrow operator used because e is base pointer
                 e->update(player.getX(), player.getY());
             }
-
+            
             /*Alternative of using auto
             for(vector<Zombie>::iterator it = zombies.begin(); it != zombies.end(); ++it) where 'it' is iterator that points towrards zombies[0] till the last  
             */
-            // ZOMBIES DAMAGE PLAYER
-            
-            //After Every Cetain Time The Zombie Hit Player ( NOt evry frame but at a certain time now) 
-            static double lastDamageTime = 0;
-
-
-            for(size_t i=0; i<enemies.size(); i++)
-            {
-                Vector2 enemyPos = enemies[i]->getPosition();
-
-                double dx = player.getX() - enemyPos.x;
-                double dy = player.getY() - enemyPos.y;
-
-                double distance = sqrt(dx*dx + dy*dy);
-
-                if(distance <= player.getWidth()/2 + enemies[i]->getRadius())
-                {
-                    double currentTime = GetTime();
-                        
-                    //Every Half A SECOND later hits player
-                    if(currentTime - lastDamageTime >= 0.5)
-                    {
-                        player.takeDamage(enemies[i]->getDamage());
-                        if(player.getHealth() <= 0)
-                        {
-                            gameState = GAME_OVER;
-                            PlaySound(gameOverSound);
+           // ZOMBIES DAMAGE PLAYER
+           
+           //After Every Cetain Time The Zombie Hit Player ( NOt evry frame but at a certain time now) 
+           static double lastDamageTime = 0;
+           
+           
+           for(size_t i=0; i<enemies.size(); i++)
+           {
+               Vector2 enemyPos = enemies[i]->getPosition();
+               
+               double dx = player.getX() - enemyPos.x;
+               double dy = player.getY() - enemyPos.y;
+               
+               double distance = sqrt(dx*dx + dy*dy);
+               
+               if(distance <= player.getWidth()/2 + enemies[i]->getRadius())
+               {
+                   double currentTime = GetTime();
+                   
+                   //Every Half A SECOND later hits player
+                   if(currentTime - lastDamageTime >= 0.5)
+                   {
+                       player.takeDamage(enemies[i]->getDamage());
+                       if(player.getHealth() <= 0)
+                       {
+                           gameState = GAME_OVER;
+                           PlaySound(gameOverSound);
                         }
                         lastDamageTime = currentTime;
                     }
                 }
                 
             }
-
+            
             //==========Bullet==========
-
+            
             //Bullet Shooting Logic
-    
-
+            
+            
             //Updating Bullet Position
             for(size_t i=0;i<bullets.size(); i++)
             {
                 bullets[i].updateDirection();
             }
-
+            
             //==========Weapon==========
             //Weapon Switching Logic
             if(IsKeyPressed(KEY_ONE))
@@ -341,7 +363,7 @@ int main()
                 if(player.hasShotgun())
                 {
                     player.setWeapon(&shotgun);
-
+                    
                 }
             }
             else if(IsKeyPressed(KEY_THREE))
@@ -349,38 +371,38 @@ int main()
                 if(player.hasMachineGun())
                 {
                     player.setWeapon(&machineGun);
-
+                    
                 }
             }
-
+            
             //Fire Rate Logic
             static double lastShotTime = 0.0;
-
+            
             if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
                 double currentTime = GetTime();
-
+                
                 if(player.getWeapon() != nullptr && (currentTime - lastShotTime) >= player.getWeapon()->getRate())
                 {
                     Vector2 mouse = GetMousePosition();
-
+                    
                     float dx = mouse.x - player.getX();
                     float dy = mouse.y - player.getY();
-
+                    
                     float length = sqrt(dx*dx + dy*dy);
-
+                    
                     if(length != 0)
                     {
                         dx /= length;
                         dy /= length;
                     }
-
+                    
                     player.shoot(bullets, dx, dy);
-
+                    
                     lastShotTime = currentTime;
                 }
             }
-
+            
             //==========Shop==========
             //Open shop with keyboard shortcut X
             if(IsKeyPressed(KEY_X))
@@ -393,17 +415,17 @@ int main()
                 }
             }
             
-             
             
-
+            
+            
             //==========Erasing==========
             //Erasing The Useless Bulllets And Zombies
             for(size_t i=0; i<bullets.size(); i++)
             {
-
+                
                 //To Check If Bullet and Zombies Have Collided Or Not
                 Vector2 bulletPos = bullets[i].getPosition();
-
+                
                 //Removing the ofscreen bullets (so that it doesnt exist forever)
                 if(bullets[i].getPosition().x > screenWidth  || bullets[i].getPosition().x <0 || bullets[i].getPosition().y > screenHeight || bullets[i].getPosition().y < 0)
                 {
@@ -411,58 +433,60 @@ int main()
                     i--; //Skipped so that the next bullet of the one that is removed is not skipped (Due To Vector Removing in between)
                     continue;
                 }
-
+                
                 for(size_t j=0; j<enemies.size(); j++)
                 {
-                Vector2 zombiePos = enemies[j]->getPosition();
-
+                    Vector2 zombiePos = enemies[j]->getPosition();
+                    
                     double dx = bulletPos.x - zombiePos.x;
                     double dy = bulletPos.y - zombiePos.y;
-
+                    
                     double length = sqrt(pow(dx,2)+ pow(dy,2)); //The distance between Zombie and Bullet
                     int radius = bullets[i].getRadius() + enemies[j]->getRadius();
                     if(length <= radius )
                     {
                         bullets.erase(bullets.begin()+i);
                         i--;
-
-
+                        
+                        
                         enemies[j]->takeDamage(50);
                         PlaySound(zombieHitSound);
-
+                        
                         if(!enemies[j]->isAlive())
                         {
                             player += enemies[j]->getReward(); 
-
+                            
                             delete enemies[j];
                             enemies.erase(enemies.begin()+j);
                         }
-
+                        
                         break; //because bullet doesnt exist so skip this bullet loop and move to next
                     }
                 }
-
+                
                 
             }
-
+            
             //==========Next Wave Logic==========
             waveManager.spawnGradually(enemies,screenWidth,screenHeight);
             waveManager.checkWaveComplete( enemies,screenWidth,screenHeight);
             
             //Saving the data into the file
             file.saveData(waveManager.getWave(),player.getMoney(),player.getWeapon()->getName(),currentDay,currentTime);
-
-             //==========Drawing Logic==========
             
+            //==========Drawing Logic==========
+
+
+         
             //Player
             player.draw();
-
+            
             //Enemy
             for(auto &e : enemies)
             {
                 e->draw();
             }
-
+            
             //Bullets
             for(size_t i=0; i<bullets.size(); i++)
             {
@@ -472,7 +496,7 @@ int main()
 
             //HUD drawing
             hud.draw(player,waveManager);
-
+                
 
 
             //======File-======
@@ -511,8 +535,8 @@ int main()
         else if(gameState == SHOP)
         {
             // Background when the shop is open
-            DrawTexturePro(background,Rectangle{0, 0, (float)background.width, (float)background.height},Rectangle{0, 0, (float)screenWidth, (float)screenHeight}, Vector2{0, 0}, 0.0f, WHITE);
-            
+            // DrawTexturePro(background,Rectangle{0, 0, (float)background.width, (float)background.height},Rectangle{0, 0, (float)screenWidth, (float)screenHeight}, Vector2{0, 0}, 0.0f, WHITE);
+          DrawBackground(background);  
             //Frozen entities
             // Draw player 
             player.draw();
