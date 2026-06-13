@@ -162,6 +162,7 @@ int main()
     //Background Image
     Texture2D background= LoadTexture("Assets/background.png");
      Texture2D homepage= LoadTexture("Assets/homepage.png");
+     Texture2D gameOver= LoadTexture("Assets/gameover.png");
 
     Texture2D zombie = LoadTexture("Assets/zombie.png");
 
@@ -600,11 +601,14 @@ int main()
         }    
         else if(gameState == GAME_OVER)
         {
-            ClearBackground(DARKGREEN);
-            DrawText("GAME OVER",  screenWidth/2 - MeasureText("GAME OVER", 60)/2,  screenHeight/3, 60, RED);
 
-            DrawText("PRESS Z TO RESTART",screenWidth/2 - MeasureText("PRESS Z TO RESTART", 30)/2, screenHeight/2,30,BLACK);
-            DrawText(TextFormat("Wave Reached: %d",waveManager.getWave()),265,260,30,BLACK);
+            DrawBackground(gameOver);
+            const char* restartText = "PRESS Z TO RESTART";
+            const char* waveText = TextFormat("Wave Reached: %d", waveManager.getWave());
+
+            DrawTextEx(zombieFont, restartText,   {(float)(screenWidth - MeasureText(restartText, 30))/2, (float)screenHeight/2},   60, 2, MAROON);
+
+            DrawTextEx(zombieFont,   waveText, {(float)(screenWidth - MeasureText(waveText, 30))/2, (float)screenHeight/2 + 80}, 60, 2, MAROON);
             
 
             if(IsKeyPressed(KEY_Z))
