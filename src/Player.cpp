@@ -62,14 +62,14 @@ void Player::move()
         yPos = 0;
     }
 
-    if (xPos + width > WORLD_WIDTH)
+    if (xPos + width > GetScreenWidth())
     {
-        xPos = WORLD_WIDTH - width;
+        xPos = GetScreenWidth() - width;
     }
 
-    if (yPos + height > WORLD_HEIGHT)
+    if (yPos + height > GetScreenHeight()  )
     {
-        yPos = WORLD_HEIGHT - height;
+        yPos = GetScreenHeight() - height;
     }
 
     // Rotate Towards Mouse
@@ -254,8 +254,8 @@ Player& Player::operator+=(int reward)
 
 void Player::reset()
 {
-    xPos = WORLD_WIDTH/2 - width/2;
-    yPos = WORLD_HEIGHT/2 - height/2;
+    xPos = GetScreenWidth()/2 - width/2;
+    yPos = GetScreenHeight()/2 - height/2;
     speed = 5;
     health = 100;
     money = 0;

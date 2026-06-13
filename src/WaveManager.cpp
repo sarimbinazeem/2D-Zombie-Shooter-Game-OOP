@@ -5,8 +5,12 @@ WaveManager::WaveManager()
 {
     wave = 1;
     zombiesRemaining = 0;
+
     spawnTimer = 0.0f;
     spawnDelay = 1.0f;
+
+    waveBreak = false;
+    breakTimer = 0.0f;
 }
 
 void WaveManager::startWave() 
@@ -17,15 +21,24 @@ void WaveManager::startWave()
     spawnTimer = 0.0f;  
 }
 
-void WaveManager::checkWaveComplete( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
+void WaveManager::checkWaveComplete(vector<Enemy*>& enemies,int screenWidth,int screenHeight)
 {
-    //If Zombies Are All Dead Start New Wave
-    if(enemies.empty() && zombiesRemaining<=0)
+    if(enemies.empty() && zombiesRemaining <= 0 && !waveBreak)
     {
-        //Move to Next Wave
-        wave++;
+        waveBreak = true;
+        breakTimer = 3.0f; // 3 second pause
+    }
 
-        startWave();
+    if(waveBreak)
+    {
+        breakTimer -= GetFrameTime();
+
+        if(breakTimer <= 0)
+        {
+            wave++;
+            startWave();
+            waveBreak = false;
+        }
     }
 }
 
@@ -36,6 +49,12 @@ int WaveManager::getWave()
 
 void WaveManager::spawnGradually( vector<Enemy*>& enemies,int screenWidth,int screenHeight)
 {
+    if(waveBreak)
+    {
+        return;
+    }
+
+
      // Add elapsed frame time
     spawnTimer += GetFrameTime();
 
@@ -107,3 +126,12 @@ void WaveManager::spawnGradually( vector<Enemy*>& enemies,int screenWidth,int sc
     zombiesRemaining--;
 }
     
+bool WaveManager::isWaveBreak()
+{
+    return waveBreak;
+}
+
+float WaveManager::getWaveBreakTimer()
+{
+    return breakTimer;
+}

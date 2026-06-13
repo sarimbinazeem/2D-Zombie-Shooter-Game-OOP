@@ -16,6 +16,10 @@ class WaveManager
         float spawnDelay;
         int wave;
 
+        bool waveBreak;
+        float breakTimer;
+
+
     public:
 
         WaveManager();
@@ -28,6 +32,8 @@ class WaveManager
 
         void spawnGradually(vector<Enemy*>& enemies,int screenWidth,int screenHeight);
 
+        bool isWaveBreak();
+        float getWaveBreakTimer();
 };
 
 #endif

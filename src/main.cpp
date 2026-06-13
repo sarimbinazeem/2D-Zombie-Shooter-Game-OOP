@@ -496,7 +496,14 @@ int main()
 
             //HUD drawing
             hud.draw(player,waveManager);
-                
+            if(waveManager.isWaveBreak())
+            {
+                const char* text =  TextFormat("WAVE %d COMPLETE", waveManager.getWave());
+
+                DrawText( text, screenWidth/2 - MeasureText(text,50)/2,  screenHeight/2 - 80,  50,  RED   );
+
+                DrawText(   TextFormat("NEXT WAVE IN %.0f",    ceil(waveManager.getWaveBreakTimer())),   screenWidth/2 - 120,  screenHeight/2,   30,  WHITE  );
+            }
 
 
             //======File-======

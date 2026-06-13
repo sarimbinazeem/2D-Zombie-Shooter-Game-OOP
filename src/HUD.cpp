@@ -63,8 +63,9 @@ void HUD::draw(Player& player, WaveManager& waves)
 
 
     // WAVE 
+    DrawText(  TextFormat("WAVE %d",waves.getWave()), GetScreenWidth() - 220,  20,  25, RED   );
 
-    DrawText(TextFormat("Wave: %d",waves.getWave()), GetScreenWidth() - 220,20,20,RED);
+    DrawText(  TextFormat("WAVE %d",waves.getWave()),  GetScreenWidth()/2 - 60,  GetScreenHeight() - 40,  25,   RED );
 
 
     //  WEAPON

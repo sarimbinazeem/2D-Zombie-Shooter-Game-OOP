@@ -9,9 +9,6 @@
 using namespace std;
 
 
-const int WORLD_WIDTH = 1200;
-const int WORLD_HEIGHT = 800;
-
 
 class Player
 {
