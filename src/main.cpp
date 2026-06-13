@@ -565,8 +565,9 @@ int main()
 
             // Draw shop menu
             shop.drawShop();
+            
 
-            DrawText("GAME PAUSED",300,20,30,YELLOW);
+            DrawText("GAME PAUSED",GetScreenWidth()/2 - MeasureText("GAME PAUSED", 30)/2, 20, 30, YELLOW);
 
 
             // The Shope Meny
